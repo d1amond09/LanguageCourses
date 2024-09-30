@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using LanguageCourses.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace LanguageCourses.Domain;
+namespace LanguageCourses.Persistence;
 
 public partial class LanguageCoursesContext : DbContext
 {

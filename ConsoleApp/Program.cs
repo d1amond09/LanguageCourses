@@ -1,4 +1,7 @@
-﻿using LanguageCourses.Domain;
+﻿using Contracts.Repositories;
+using LanguageCourses.Domain;
+using LanguageCourses.Persistence;
+using LanguageCourses.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -6,7 +9,7 @@ namespace ConsoleApp;
 
 internal class Program
 {
-	static void Main()
+	static async Task Main()
 	{
 		var builder = new ConfigurationBuilder();
 		builder.SetBasePath(Directory.GetCurrentDirectory());
@@ -19,12 +22,12 @@ internal class Program
 			.UseSqlServer(connectionString)
 			.Options;
 
-		using (LanguageCoursesContext db = new (options))
+		using (LanguageCoursesContext db = new(options))
 		{
-			var users = db.Employees.ToList();
-			foreach (var u in users)
+			var students = new StudentRepository(db).FindByCondition(x => x.BirthDate > new DateOnly(2004, 12, 1));
+			foreach (var u in students.ToList())
 			{
-				Console.WriteLine($"{u.EmployeeId} - {u.Name} - {u.Address}");
+				Console.WriteLine($"{u.StudentId} - {u.Name} - {u.BirthDate}");
 			}
 		}
 		Console.Read();

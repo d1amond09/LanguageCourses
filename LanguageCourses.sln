@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{F70B418F-4D08-4421-A982-5F0C6B7957D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{F70B418F-4D08-4421-A982-5F0C6B7957D9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{9D2F104C-0339-4F4D-AF57-9DDCF59796E2}"
 EndProject
@@ -11,11 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{35209696-ADD3-41AA-8F6F-713E3ECB819E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageCourses.Domain", "LanguageCourses.Domain\LanguageCourses.Domain.csproj", "{2CAD72E3-2AE1-4C7D-97AE-2401AFE8CED4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LanguageCourses.Domain", "LanguageCourses.Domain\LanguageCourses.Domain.csproj", "{2CAD72E3-2AE1-4C7D-97AE-2401AFE8CED4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageCourses.Application", "LanguageCourses.Application\LanguageCourses.Application.csproj", "{C7AF069C-4D3A-42A1-852A-A67674561A09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LanguageCourses.Application", "LanguageCourses.Application\LanguageCourses.Application.csproj", "{C7AF069C-4D3A-42A1-852A-A67674561A09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageCourses.Persistence", "LanguageCourses.Persistence\LanguageCourses.Persistence.csproj", "{E1469106-52CD-4F2F-8ABE-A62C228E91C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LanguageCourses.Persistence", "LanguageCourses.Persistence\LanguageCourses.Persistence.csproj", "{E1469106-52CD-4F2F-8ABE-A62C228E91C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{855AF632-F66B-49B1-9648-01800F51F2A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{E1469106-52CD-4F2F-8ABE-A62C228E91C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1469106-52CD-4F2F-8ABE-A62C228E91C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1469106-52CD-4F2F-8ABE-A62C228E91C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{855AF632-F66B-49B1-9648-01800F51F2A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{855AF632-F66B-49B1-9648-01800F51F2A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{855AF632-F66B-49B1-9648-01800F51F2A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{855AF632-F66B-49B1-9648-01800F51F2A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{2CAD72E3-2AE1-4C7D-97AE-2401AFE8CED4} = {9D2F104C-0339-4F4D-AF57-9DDCF59796E2}
 		{C7AF069C-4D3A-42A1-852A-A67674561A09} = {9D2F104C-0339-4F4D-AF57-9DDCF59796E2}
 		{E1469106-52CD-4F2F-8ABE-A62C228E91C5} = {460124A8-E3A9-4776-A352-8EAB8E85CCC5}
+		{855AF632-F66B-49B1-9648-01800F51F2A7} = {9D2F104C-0339-4F4D-AF57-9DDCF59796E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C0E5AC33-8472-4F78-B2D3-412E5829C0EA}
