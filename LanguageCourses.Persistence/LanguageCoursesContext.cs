@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace LanguageCourses.Domain;
 
@@ -24,9 +25,6 @@ public partial class LanguageCoursesContext : DbContext
     public virtual DbSet<Payment> Payments { get; set; }
 
     public virtual DbSet<Student> Students { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=D1AMOND;Database=LanguageCourses;Integrated Security=true; Trusted_Connection=True; TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
