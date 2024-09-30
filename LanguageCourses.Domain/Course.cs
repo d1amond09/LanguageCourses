@@ -7,6 +7,8 @@ public partial class Course
 {
     public Guid CourseId { get; set; }
 
+    public Guid EmployeeId { get; set; }
+
     public string Name { get; set; } = null!;
 
     public string TrainingProgram { get; set; } = null!;
@@ -22,4 +24,8 @@ public partial class Course
     public int Hours { get; set; }
 
     public decimal TuitionFee { get; set; }
+
+    public virtual Employee Employee { get; set; } = null!;
+
+    public virtual ICollection<Student> Students { get; set; } = new List<Student>();
 }

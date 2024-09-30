@@ -21,7 +21,7 @@ public partial class Student
 
     public string PassportNumber { get; set; } = null!;
 
-	public virtual ICollection<Debtor> Debtors { get; set; } = [];
+    public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
 
-    public virtual ICollection<Payment> Payments { get; set; } = [];
+    public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
 }

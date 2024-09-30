@@ -17,10 +17,6 @@ public partial class LanguageCoursesContext : DbContext
 
     public virtual DbSet<Course> Courses { get; set; }
 
-    public virtual DbSet<CoursesStudent> CoursesStudents { get; set; }
-
-    public virtual DbSet<Debtor> Debtors { get; set; }
-
     public virtual DbSet<Employee> Employees { get; set; }
 
     public virtual DbSet<JobTitle> JobTitles { get; set; }
@@ -36,7 +32,7 @@ public partial class LanguageCoursesContext : DbContext
     {
         modelBuilder.Entity<Course>(entity =>
         {
-            entity.HasKey(e => e.CourseId).HasName("PK__Courses__C92D7187E3190DCB");
+            entity.HasKey(e => e.CourseId).HasName("PK__Courses__C92D71876B88FF34");
 
             entity.Property(e => e.CourseId)
                 .HasDefaultValueSql("(newid())")
@@ -44,6 +40,7 @@ public partial class LanguageCoursesContext : DbContext
             entity.Property(e => e.Description)
                 .HasMaxLength(255)
                 .IsUnicode(false);
+            entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
             entity.Property(e => e.Intensity)
                 .HasMaxLength(255)
                 .IsUnicode(false);
@@ -54,46 +51,36 @@ public partial class LanguageCoursesContext : DbContext
                 .HasMaxLength(255)
                 .IsUnicode(false);
             entity.Property(e => e.TuitionFee).HasColumnType("decimal(10, 2)");
-        });
 
-        modelBuilder.Entity<CoursesStudent>(entity =>
-        {
-            entity.HasNoKey();
+            entity.HasOne(d => d.Employee).WithMany(p => p.Courses)
+                .HasForeignKey(d => d.EmployeeId)
+                .HasConstraintName("FK__Courses__Employe__3F1C4B12");
 
-            entity.Property(e => e.CourseId).HasColumnName("CourseID");
-            entity.Property(e => e.StudentId).HasColumnName("StudentID");
-
-            entity.HasOne(d => d.Course).WithMany()
-                .HasForeignKey(d => d.CourseId)
-                .HasConstraintName("FK__CoursesSt__Cours__627A95E8");
-
-            entity.HasOne(d => d.Student).WithMany()
-                .HasForeignKey(d => d.StudentId)
-                .HasConstraintName("FK__CoursesSt__Stude__636EBA21");
-        });
-
-        modelBuilder.Entity<Debtor>(entity =>
-        {
-            entity.HasKey(e => e.DebtorId).HasName("PK__Debtors__C47716E6B0A48EEA");
-
-            entity.Property(e => e.DebtorId)
-                .HasDefaultValueSql("(newid())")
-                .HasColumnName("DebtorID");
-            entity.Property(e => e.DebtAmount).HasColumnType("decimal(10, 2)");
-            entity.Property(e => e.StudentId).HasColumnName("StudentID");
-
-            entity.HasOne(d => d.Student).WithMany(p => p.Debtors)
-                .HasForeignKey(d => d.StudentId)
-                .HasConstraintName("FK__Debtors__Student__758D6A5C");
+            entity.HasMany(d => d.Students).WithMany(p => p.Courses)
+                .UsingEntity<Dictionary<string, object>>(
+                    "CourseStudent",
+                    r => r.HasOne<Student>().WithMany()
+                        .HasForeignKey("StudentId")
+                        .HasConstraintName("FK__CourseStu__Stude__4B8221F7"),
+                    l => l.HasOne<Course>().WithMany()
+                        .HasForeignKey("CourseId")
+                        .HasConstraintName("FK__CourseStu__Cours__4A8DFDBE"),
+                    j =>
+                    {
+                        j.HasKey("CourseId", "StudentId").HasName("PK__CourseSt__4A0123205C2964B0");
+                        j.ToTable("CourseStudents");
+                        j.IndexerProperty<Guid>("CourseId").HasColumnName("CourseID");
+                        j.IndexerProperty<Guid>("StudentId").HasColumnName("StudentID");
+                    });
         });
 
         modelBuilder.Entity<Employee>(entity =>
         {
-            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__7AD04FF1D2ECEA86");
+            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__7AD04FF14A0267E9");
 
-            entity.HasIndex(e => e.PassportNumber, "UQ__Employee__45809E71FECC59B5").IsUnique();
+            entity.HasIndex(e => e.PassportNumber, "UQ__Employee__45809E71543558D3").IsUnique();
 
-            entity.HasIndex(e => e.Phone, "UQ__Employee__5C7E359E763507D9").IsUnique();
+            entity.HasIndex(e => e.Phone, "UQ__Employee__5C7E359EB6DB6BF9").IsUnique();
 
             entity.Property(e => e.EmployeeId)
                 .HasDefaultValueSql("(newid())")
@@ -123,12 +110,12 @@ public partial class LanguageCoursesContext : DbContext
 
             entity.HasOne(d => d.JobTitle).WithMany(p => p.Employees)
                 .HasForeignKey(d => d.JobTitleId)
-                .HasConstraintName("FK__Employees__JobTi__6CF8245B");
+                .HasConstraintName("FK__Employees__JobTi__3B4BBA2E");
         });
 
         modelBuilder.Entity<JobTitle>(entity =>
         {
-            entity.HasKey(e => e.JobTitleId).HasName("PK__JobTitle__35382FC918C34FC8");
+            entity.HasKey(e => e.JobTitleId).HasName("PK__JobTitle__35382FC9A56AE929");
 
             entity.Property(e => e.JobTitleId)
                 .HasDefaultValueSql("(newid())")
@@ -137,17 +124,17 @@ public partial class LanguageCoursesContext : DbContext
                 .HasMaxLength(255)
                 .IsUnicode(false);
             entity.Property(e => e.Requirements)
-                .HasMaxLength(200)
+                .HasMaxLength(255)
                 .IsUnicode(false);
             entity.Property(e => e.Responsibilities)
-                .HasMaxLength(200)
+                .HasMaxLength(255)
                 .IsUnicode(false);
             entity.Property(e => e.Salary).HasColumnType("decimal(10, 2)");
         });
 
         modelBuilder.Entity<Payment>(entity =>
         {
-            entity.HasKey(e => e.PaymentId).HasName("PK__Payments__9B556A58D200545B");
+            entity.HasKey(e => e.PaymentId).HasName("PK__Payments__9B556A5874FA56DF");
 
             entity.Property(e => e.PaymentId)
                 .HasDefaultValueSql("(newid())")
@@ -160,16 +147,16 @@ public partial class LanguageCoursesContext : DbContext
 
             entity.HasOne(d => d.Student).WithMany(p => p.Payments)
                 .HasForeignKey(d => d.StudentId)
-                .HasConstraintName("FK__Payments__Studen__70C8B53F");
+                .HasConstraintName("FK__Payments__Studen__4F52B2DB");
         });
 
         modelBuilder.Entity<Student>(entity =>
         {
-            entity.HasKey(e => e.StudentId).HasName("PK__Students__32C52A791123D2BB");
+            entity.HasKey(e => e.StudentId).HasName("PK__Students__32C52A7968AC35E8");
 
-            entity.HasIndex(e => e.PassportNumber, "UQ__Students__45809E716551E45A").IsUnique();
+            entity.HasIndex(e => e.PassportNumber, "UQ__Students__45809E717E8906CA").IsUnique();
 
-            entity.HasIndex(e => e.Phone, "UQ__Students__5C7E359E53246B35").IsUnique();
+            entity.HasIndex(e => e.Phone, "UQ__Students__5C7E359EED8438DE").IsUnique();
 
             entity.Property(e => e.StudentId)
                 .HasDefaultValueSql("(newid())")
@@ -193,6 +180,7 @@ public partial class LanguageCoursesContext : DbContext
                 .HasMaxLength(255)
                 .IsUnicode(false);
         });
+
 
         OnModelCreatingPartial(modelBuilder);
     }

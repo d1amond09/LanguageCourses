@@ -25,5 +25,7 @@ public partial class Employee
 
     public string Education { get; set; } = null!;
 
+    public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
+
     public virtual JobTitle JobTitle { get; set; } = null!;
 }
