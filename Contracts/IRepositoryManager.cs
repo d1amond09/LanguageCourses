@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Contracts.Repositories;
+﻿using Contracts.Repositories;
 
 namespace Contracts;
 
@@ -15,4 +10,5 @@ public interface IRepositoryManager
 	IPaymentRepository Payments { get; }
 	IStudentRepository Students { get; }
 	Task SaveAsync();
+	void SaveChanges();
 }

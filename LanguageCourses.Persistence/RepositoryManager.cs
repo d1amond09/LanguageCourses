@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Contracts;
+﻿using Contracts;
 using Contracts.Repositories;
 using LanguageCourses.Persistence.Repositories;
 
@@ -17,7 +12,6 @@ public class RepositoryManager : IRepositoryManager
 	private readonly Lazy<ICourseRepository> _coursesRep;
 	private readonly Lazy<IStudentRepository> _studRep;
 	private readonly Lazy<IPaymentRepository> _paymRep;
-
 	public RepositoryManager(LanguageCoursesContext dbContext)
 	{
 		_dbContext = dbContext;
@@ -35,4 +29,5 @@ public class RepositoryManager : IRepositoryManager
 	public IPaymentRepository Payments => _paymRep.Value;
 
 	public async Task SaveAsync() => await _dbContext.SaveChangesAsync();
+	public void SaveChanges() => _dbContext.SaveChanges();
 }

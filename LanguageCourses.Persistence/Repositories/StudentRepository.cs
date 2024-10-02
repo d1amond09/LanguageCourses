@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LanguageCourses.Domain;
-using Contracts.Repositories;
+﻿using Contracts.Repositories;
+using LanguageCourses.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace LanguageCourses.Persistence.Repositories;
@@ -13,6 +8,7 @@ public class StudentRepository(LanguageCoursesContext appDbContext) :
 	RepositoryBase<Student>(appDbContext), IStudentRepository
 {
 	public void CreateStudent(Student student) => Create(student);
+	public void UpdateStudent(Student student) => Update(student);
 
 	public void DeleteStudent(Student student) => Delete(student);
 
@@ -20,6 +16,15 @@ public class StudentRepository(LanguageCoursesContext appDbContext) :
 		await FindAll(trackChanges)
 			.OrderBy(c => c.Name)
 			.ToListAsync();
+
+	public Student? GetStudentByPassport(string passport, bool trackChanges = false) =>
+		FindByCondition(c => c.PassportNumber.Equals(passport), trackChanges)
+			.SingleOrDefault();
+
+	public async Task<Student?> GetStudentByPassportAsync(string passport, bool trackChanges = false) =>
+		await FindByCondition(c => c.PassportNumber.Equals(passport), trackChanges)
+			.SingleOrDefaultAsync();
+
 	public async Task<Student?> GetStudentAsync(Guid studentId, bool trackChanges = false) =>
 		await FindByCondition(c => c.StudentId.Equals(studentId), trackChanges)
 			.SingleOrDefaultAsync();

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LanguageCourses.Domain;
-using Contracts.Repositories;
+﻿using Contracts.Repositories;
+using LanguageCourses.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace LanguageCourses.Persistence.Repositories;
@@ -15,6 +10,29 @@ public class PaymentRepository(LanguageCoursesContext appDbContext) :
 	public void CreatePayment(Payment Payment) => Create(Payment);
 
 	public void DeletePayment(Payment Payment) => Delete(Payment);
+
+	public async Task<IEnumerable<(string Purpose, decimal AvgAmount)>> GetPaymentsByPurposeAsync(bool trackChanges = false)
+	{
+		var query = FindAll(trackChanges);
+
+		if (!trackChanges)
+		{
+			query = query.AsNoTracking();
+		}
+
+		var result = await query
+			.GroupBy(e => e.Purpose)
+			.Select(gr => new
+			{
+				Purpose = gr.Key,
+				AvgAmount = gr.Average(e => e.Amount)
+			})
+			.ToListAsync();
+
+		return result.Select(r => (r.Purpose, r.AvgAmount));
+	}
+
+
 
 	public async Task<IEnumerable<Payment>> GetAllPaymentsAsync(bool trackChanges = false) =>
 		await FindAll(trackChanges)
