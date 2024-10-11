@@ -1,6 +1,4 @@
-﻿using Contracts.Repositories;
-
-namespace Contracts;
+﻿namespace Contracts.Repositories;
 
 public interface IRepositoryManager
 {
