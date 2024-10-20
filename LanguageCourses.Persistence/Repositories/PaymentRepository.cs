@@ -45,4 +45,7 @@ public class PaymentRepository(LanguageCoursesContext appDbContext) :
 	public async Task<IEnumerable<Payment>> GetByIdsAsync(IEnumerable<Guid> ids, bool trackChanges = false) =>
 		await FindByCondition(x => ids.Contains(x.PaymentId), trackChanges)
 			.ToListAsync();
+
+	public IEnumerable<Payment> GetPaymentsTop(int rows) =>
+		 [.. FindAll().Include(x => x.Student).Take(rows)];
 }

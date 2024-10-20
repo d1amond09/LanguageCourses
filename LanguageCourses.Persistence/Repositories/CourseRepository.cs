@@ -22,4 +22,7 @@ public class CourseRepository(LanguageCoursesContext appDbContext) :
 	public async Task<IEnumerable<Course>> GetByIdsAsync(IEnumerable<Guid> ids, bool trackChanges = false) =>
 		await FindByCondition(x => ids.Contains(x.CourseId), trackChanges)
 			.ToListAsync();
+
+	public IEnumerable<Course> GetCoursesTop(int rows) =>
+		 [.. FindAll().Include(x => x.Employee).Include(c => c.Students).Where(c => c.Students.Count > 0).Take(rows)];
 }

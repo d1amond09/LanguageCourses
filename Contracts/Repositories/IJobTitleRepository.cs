@@ -1,4 +1,5 @@
-﻿using LanguageCourses.Domain.Entities;
+﻿using System.Linq.Expressions;
+using LanguageCourses.Domain.Entities;
 
 namespace Contracts.Repositories;
 
@@ -11,4 +12,8 @@ public interface IJobTitleRepository
 	JobTitle? GetJobTitleByName(string name);
 	public void CreateJobTitle(JobTitle jobTitle);
 	public void DeleteJobTitle(JobTitle jobTitle);
+
+	IEnumerable<JobTitle> GetJobTitlesTop(int rows);
+	IQueryable<JobTitle> FindByCondition(Expression<Func<JobTitle, bool>> expression, bool trackChanges = false);
+
 }

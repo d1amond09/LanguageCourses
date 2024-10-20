@@ -36,4 +36,7 @@ public class JobTitleRepository(LanguageCoursesContext appDbContext) :
 	public async Task<IEnumerable<JobTitle>> GetByIdsAsync(IEnumerable<Guid> ids, bool trackChanges = false) =>
 		await FindByCondition(x => ids.Contains(x.JobTitleId), trackChanges)
 			.ToListAsync();
+
+	public IEnumerable<JobTitle> GetJobTitlesTop(int rows) =>
+		 [.. FindAll().Include(c => c.Employees).Where(c => c.Employees.Count > 0).Take(rows)];
 }

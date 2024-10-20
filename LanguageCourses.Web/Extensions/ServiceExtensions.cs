@@ -33,6 +33,4 @@ public static class ServiceExtensions
 	
 	public static void ConfigureServiceManager(this IServiceCollection services) =>
 		services.AddScoped<IServiceManager, ServiceManager>();
-	public static void ConfigureStudentService(this IServiceCollection services) =>
-		services.AddScoped<IStudentService, StudentService>();
 }

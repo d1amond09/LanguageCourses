@@ -1,27 +1,27 @@
 ﻿using Contracts.Repositories;
 using Contracts.Services;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace LanguageCourses.Application.Services;
 
-public class ServiceManager : IServiceManager
+public class ServiceManager(IRepositoryManager repManager, IMemoryCache memCache) : IServiceManager
 {
-	private readonly Lazy<IEmployeeService> _empService;
-	private readonly Lazy<IJobTitleService> _jobService;
-	private readonly Lazy<ICourseService> _coursesService;
-	private readonly Lazy<IStudentService> _studService;
-	private readonly Lazy<IPaymentService> _paymService;
+	private readonly Lazy<IEmployeeService> _empService = new(() => 
+		new EmployeeService(repManager, memCache));
 
-    public ServiceManager(IRepositoryManager repManager)
-    {
-		_empService = new Lazy<IEmployeeService>(() => new EmployeeService(repManager));
-		_jobService = new Lazy<IJobTitleService>(() => new JobTitleService(repManager));
-		_coursesService = new Lazy<ICourseService>(() => new CourseService(repManager));
-		//_studService = new Lazy<IStudentService>(() => new StudentService(repManager));
-		_paymService = new Lazy<IPaymentService>(() => new PaymentService(repManager));
-    }
+	private readonly Lazy<IJobTitleService> _jobService = new(() => 
+		new JobTitleService(repManager, memCache));
 
+	private readonly Lazy<ICourseService> _coursesService = new(() => 
+		new CourseService(repManager, memCache));
 
-    public ICourseService CourseService => _coursesService.Value;
+	private readonly Lazy<IStudentService> _studService = new(() => 
+		new StudentService(repManager, memCache));
+
+	private readonly Lazy<IPaymentService> _paymService = new(() => 
+		new PaymentService(repManager, memCache));
+
+	public ICourseService CourseService => _coursesService.Value;
 	public IEmployeeService EmployeeService => _empService.Value;
 	public IJobTitleService JobTitleService => _jobService.Value;
 	public IPaymentService PaymentService => _paymService.Value;
