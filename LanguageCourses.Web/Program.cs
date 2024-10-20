@@ -198,7 +198,7 @@ public class Program
 		app.Run(async context =>
 		{
 			ICourseService? cachedCoursesService = context.RequestServices.GetService<IServiceManager>()?.CourseService;
-			IEnumerable<Course>? сourses = cachedCoursesService?.GetCourses("Courses20");
+			IEnumerable<Course>? courses = cachedCoursesService?.GetCourses("Courses20");
 
 			string HtmlString = "<HTML><HEAD>" +
 				"<TITLE>Курсы</TITLE></HEAD>" +
@@ -215,7 +215,7 @@ public class Program
 			HtmlString += "<TD>Преподаватель</TD>";
 			HtmlString += "<TD>Слушатели</TD>";
 			HtmlString += "</TH>";
-			foreach (Course course in сourses)
+			foreach (Course course in courses)
 			{
 				HtmlString += "<TR>";
 				HtmlString += "<TD>" + course.CourseId + "</TD>";
