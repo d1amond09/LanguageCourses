@@ -1,4 +1,5 @@
-﻿using Contracts.Repositories;
+﻿using Contracts;
+using Contracts.Repositories;
 
 namespace LanguageCourses.Persistence.Repositories;
 
