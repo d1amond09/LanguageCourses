@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using Contracts.Services;
+using LanguageCourses.Domain.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,10 +20,12 @@ public class StudentController(IServiceManager service) : ControllerBase
 	}
 
 	[HttpGet("{id:guid}")]
-	public IActionResult GetCompany(Guid id)
+	public IActionResult GetStudent(Guid id)
 	{
-		var company = _service.StudentService.GetStudentAsync(id, trackChanges: false);
-		return Ok(company);
+		var student = _service.StudentService.GetStudentAsync(id, trackChanges: false) 
+					?? throw new StudentNotFoundException(id);
+
+		return Ok(student);
 	}
 
 }

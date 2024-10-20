@@ -7,7 +7,7 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace LanguageCourses.Application.Services;
 
-public sealed class StudentService(IRepositoryManager rep, ILoggerManager logger) : IStudentService
+internal sealed class StudentService(IRepositoryManager rep, ILoggerManager logger) : IStudentService
 {
 	private readonly IRepositoryManager _rep = rep;
 	private readonly ILoggerManager _logger = logger;

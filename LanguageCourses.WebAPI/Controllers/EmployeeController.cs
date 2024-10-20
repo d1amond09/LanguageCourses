@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using Contracts.Services;
+using LanguageCourses.Domain.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,15 +15,16 @@ public class EmployeeController(IServiceManager service) : ControllerBase
 	[HttpGet]
 	public async Task<IActionResult> GetEmployees()
 	{
-		var Employees = await _service.EmployeeService.GetAllEmployeesAsync(trackChanges: false);
-		return Ok(Employees);
+		var employees = await _service.EmployeeService.GetAllEmployeesAsync(trackChanges: false);
+		return Ok(employees);
 	}
 
 	[HttpGet("{id:guid}")]
-	public IActionResult GetCompany(Guid id)
+	public IActionResult GetEmployee(Guid id)
 	{
-		var company = _service.EmployeeService.GetEmployeeAsync(id, trackChanges: false);
-		return Ok(company);
+		var employee = _service.EmployeeService.GetEmployeeAsync(id, trackChanges: false)
+			?? throw new EmployeeNotFoundException(id);
+		return Ok(employee);
 	}
 
 }

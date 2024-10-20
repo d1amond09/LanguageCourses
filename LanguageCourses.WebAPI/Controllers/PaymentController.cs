@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using Contracts.Services;
+using LanguageCourses.Domain.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,15 +15,16 @@ public class PaymentController(IServiceManager service) : ControllerBase
 	[HttpGet]
 	public async Task<IActionResult> GetPayments()
 	{
-		var Payments = await _service.PaymentService.GetAllPaymentsAsync(trackChanges: false);
-		return Ok(Payments);
+		var payments = await _service.PaymentService.GetAllPaymentsAsync(trackChanges: false);
+		return Ok(payments);
 	}
 
 	[HttpGet("{id:guid}")]
-	public IActionResult GetCompany(Guid id)
+	public IActionResult GetPayment(Guid id)
 	{
-		var company = _service.PaymentService.GetPaymentAsync(id, trackChanges: false);
-		return Ok(company);
+		var payment = _service.PaymentService.GetPaymentAsync(id, trackChanges: false)
+			?? throw new PaymentNotFoundException(id);
+		return Ok(payment);
 	}
 
 }

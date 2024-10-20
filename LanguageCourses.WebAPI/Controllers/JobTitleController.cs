@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using Contracts.Services;
+using LanguageCourses.Domain.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,15 +15,16 @@ public class JobTitleController(IServiceManager service) : ControllerBase
 	[HttpGet]
 	public async Task<IActionResult> GetJobTitles()
 	{
-		var JobTitles = await _service.JobTitleService.GetAllJobTitlesAsync(trackChanges: false);
-		return Ok(JobTitles);
+		var jobTitles = await _service.JobTitleService.GetAllJobTitlesAsync(trackChanges: false);
+		return Ok(jobTitles);
 	}
 
 	[HttpGet("{id:guid}")]
-	public IActionResult GetCompany(Guid id)
+	public IActionResult GetJobTitle(Guid id)
 	{
-		var company = _service.JobTitleService.GetJobTitleAsync(id, trackChanges: false);
-		return Ok(company);
+		var jobTitle = _service.JobTitleService.GetJobTitleAsync(id, trackChanges: false)
+			?? throw new JobTitleNotFoundException(id);
+		return Ok(jobTitle);
 	}
 
 }
