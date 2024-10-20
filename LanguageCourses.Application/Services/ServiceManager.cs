@@ -16,7 +16,7 @@ public class ServiceManager : IServiceManager
 		_empService = new Lazy<IEmployeeService>(() => new EmployeeService(repManager));
 		_jobService = new Lazy<IJobTitleService>(() => new JobTitleService(repManager));
 		_coursesService = new Lazy<ICourseService>(() => new CourseService(repManager));
-		_studService = new Lazy<IStudentService>(() => new StudentService(repManager));
+		//_studService = new Lazy<IStudentService>(() => new StudentService(repManager));
 		_paymService = new Lazy<IPaymentService>(() => new PaymentService(repManager));
     }
 

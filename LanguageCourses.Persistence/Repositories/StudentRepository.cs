@@ -32,4 +32,7 @@ public class StudentRepository(LanguageCoursesContext appDbContext) :
 	public async Task<IEnumerable<Student>> GetByIdsAsync(IEnumerable<Guid> ids, bool trackChanges = false) =>
 		await FindByCondition(x => ids.Contains(x.StudentId), trackChanges)
 			.ToListAsync();
+
+	public IEnumerable<Student> GetStudentsTop(int rows) =>
+		 [.. FindAll().Take(rows)];
 }

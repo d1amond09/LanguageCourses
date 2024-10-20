@@ -12,4 +12,10 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Contracts\Contracts.csproj" />
+    <ProjectReference Include="..\LanguageCourses.Application\LanguageCourses.Application.csproj" />
+    <ProjectReference Include="..\LanguageCourses.Persistence\LanguageCourses.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>
