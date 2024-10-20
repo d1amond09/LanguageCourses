@@ -1,7 +1,6 @@
 ﻿using Contracts;
 using LanguageCourses.Application;
 using LanguageCourses.Persistence;
-using LanguageCourses.Persistence.Repositories;
 using LanguageCourses.WebAPI.Formatters.Output;
 using LoggerService;
 using Microsoft.EntityFrameworkCore;

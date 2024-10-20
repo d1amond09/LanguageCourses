@@ -1,7 +1,7 @@
-﻿using LanguageCourses.Domain.Entities.DataTransferObjects;
+﻿using System.Text;
+using LanguageCourses.Domain.DataTransferObjects;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
-using System.Text;
 
 namespace LanguageCourses.WebAPI.Formatters.Output;
 
@@ -23,24 +23,25 @@ public class CsvOutputFormatter : TextOutputFormatter
 		}
 		return false;
 	}
-	public override async Task WriteResponseBodyAsync(OutputFormatterWriteContext
-   context, Encoding selectedEncoding)
+	public override async Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
 	{
 		var response = context.HttpContext.Response;
 		var buffer = new StringBuilder();
-		if (context.Object is IEnumerable<StudentDto>)
+		if (context.Object is not IEnumerable<StudentDto>)
+		{
+			ArgumentNullException.ThrowIfNull(context.Object);
+			FormatCsv(buffer, (StudentDto)context.Object);
+		}
+		else
 		{
 			foreach (var student in (IEnumerable<StudentDto>)context.Object)
 			{
 				FormatCsv(buffer, student);
 			}
 		}
-		else
-		{
-			FormatCsv(buffer, (StudentDto) context.Object);
-		}
 		await response.WriteAsync(buffer.ToString());
 	}
+
 	private static void FormatCsv(StringBuilder buffer, StudentDto student)
 	{
 		buffer.AppendLine($"{student.StudentId},\"{student.Surname},\"{student.Name},\"{student.MidName},\"{student.PassportNumber},\"{student.Address},\"{student.BirthDate},\"{student.Phone}\"");

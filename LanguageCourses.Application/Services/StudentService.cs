@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Contracts;
 using Contracts.Services;
+using LanguageCourses.Domain.DataTransferObjects;
 using LanguageCourses.Domain.Entities;
-using LanguageCourses.Domain.Entities.DataTransferObjects;
 
 namespace LanguageCourses.Application.Services;
 

@@ -1,5 +1,5 @@
-﻿using LanguageCourses.Domain.Entities;
-using LanguageCourses.Domain.Entities.DataTransferObjects;
+﻿using LanguageCourses.Domain.DataTransferObjects;
+using LanguageCourses.Domain.Entities;
 
 namespace Contracts.Services;
 

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using LanguageCourses.Domain.DataTransferObjects;
 using LanguageCourses.Domain.Entities;
-using LanguageCourses.Domain.Entities.DataTransferObjects;
 
 namespace LanguageCourses.WebAPI;
 

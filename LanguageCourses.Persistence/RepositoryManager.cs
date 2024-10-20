@@ -1,7 +1,8 @@
 ﻿using Contracts;
 using Contracts.Repositories;
+using LanguageCourses.Persistence.Repositories;
 
-namespace LanguageCourses.Persistence.Repositories;
+namespace LanguageCourses.Persistence;
 
 public class RepositoryManager : IRepositoryManager
 {

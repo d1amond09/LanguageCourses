@@ -1,4 +1,4 @@
-﻿namespace LanguageCourses.Domain.Entities.DataTransferObjects;
+﻿namespace LanguageCourses.Domain.DataTransferObjects;
 
 public record PaymentDto
 {
