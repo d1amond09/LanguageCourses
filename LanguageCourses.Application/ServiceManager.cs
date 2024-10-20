@@ -1,8 +1,6 @@
 ﻿using Contracts;
-using Contracts.Repositories;
 using Contracts.Services;
 using LanguageCourses.Application.Services;
-using Microsoft.Extensions.Caching.Memory;
 
 namespace LanguageCourses.Application;
 

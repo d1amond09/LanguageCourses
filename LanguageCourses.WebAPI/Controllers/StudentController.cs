@@ -1,7 +1,5 @@
 ﻿using Contracts;
-using Contracts.Services;
 using LanguageCourses.Domain.Exceptions;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LanguageCourses.WebAPI.Controllers;
@@ -22,7 +20,7 @@ public class StudentController(IServiceManager service) : ControllerBase
 	[HttpGet("{id:guid}")]
 	public IActionResult GetStudent(Guid id)
 	{
-		var student = _service.StudentService.GetStudentAsync(id, trackChanges: false) 
+		var student = _service.StudentService.GetStudentAsync(id, trackChanges: false)
 					?? throw new StudentNotFoundException(id);
 
 		return Ok(student);

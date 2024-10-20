@@ -13,7 +13,7 @@ public class Program
 		LogManager.Setup().LoadConfigurationFromFile("nlog.config", true);
 
 		ConfigureServices(builder.Services, builder.Configuration);
-		
+
 		var app = builder.Build();
 		var logger = app.Services.GetRequiredService<ILoggerManager>();
 		app.ConfigureExceptionHandler(logger);

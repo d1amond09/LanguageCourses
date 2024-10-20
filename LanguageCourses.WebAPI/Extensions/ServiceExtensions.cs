@@ -1,8 +1,5 @@
 ﻿using Contracts;
-using Contracts.Repositories;
-using Contracts.Services;
 using LanguageCourses.Application;
-using LanguageCourses.Application.Services;
 using LanguageCourses.Persistence;
 using LanguageCourses.Persistence.Repositories;
 using LoggerService;
@@ -37,7 +34,7 @@ public static class ServiceExtensions
 		services.AddScoped<IServiceManager, ServiceManager>();
 
 	public static void ConfigureIISIntegration(this IServiceCollection services) =>
-		services.Configure<IISOptions>(options => 
+		services.Configure<IISOptions>(options =>
 		{
 
 		});

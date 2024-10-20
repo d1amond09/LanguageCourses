@@ -1,7 +1,5 @@
 ﻿using Contracts;
-using Contracts.Services;
 using LanguageCourses.Domain.Exceptions;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LanguageCourses.WebAPI.Controllers;

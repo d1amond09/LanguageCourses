@@ -1,9 +1,6 @@
-﻿using System.Linq.Expressions;
-using Contracts;
-using Contracts.Repositories;
+﻿using Contracts;
 using Contracts.Services;
 using LanguageCourses.Domain.Entities;
-using Microsoft.Extensions.Caching.Memory;
 
 namespace LanguageCourses.Application.Services;
 

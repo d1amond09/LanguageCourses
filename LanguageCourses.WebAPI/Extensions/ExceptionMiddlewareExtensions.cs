@@ -1,8 +1,8 @@
-﻿using Contracts;
+﻿using System.Net;
+using Contracts;
 using LanguageCourses.Domain.ErrorModel;
 using LanguageCourses.Domain.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
-using System.Net;
 
 namespace LanguageCourses.WebAPI.Extensions;
 
@@ -26,7 +26,7 @@ public static class ExceptionMiddlewareExtensions
 					};
 
 					logger.LogError($"Something went wrong: {contextFeature.Error}");
-					
+
 					await context.Response.WriteAsync(new ErrorDetails()
 					{
 						StatusCode = context.Response.StatusCode,
