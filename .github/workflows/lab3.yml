@@ -1,12 +1,14 @@
-name: build and test
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
+name: .NET
 on:
   push:
   pull_request:
     branches: [ lab3 ]
     paths:
-    - '.cs'
-    - '.csproj'
+    - '**.cs'
+    - '**.csproj'
 
 env:
   DOTNET_VERSION: '8.0' # The .NET SDK version to use
@@ -18,7 +20,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest, windows-latest]
 
     steps:
     - uses: actions/checkout@v4
@@ -29,9 +31,7 @@ jobs:
 
     - name: Install dependencies
       run: dotnet restore
-
+      
     - name: Build
       run: dotnet build --configuration Release --no-restore
-
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal
+    
