@@ -34,8 +34,8 @@ public class StudentRepository(LanguageCoursesContext appDbContext) :
 			.ToListAsync();
 
 	public IEnumerable<Student> GetStudentsTop(int rows) =>
-		 [.. FindAll().Take(rows)
+		 [.. FindAll()
 			.Include(s => s.Payments)
 			.Include(c => c.Courses)
-			.Where(c => c.Courses.Count > 0)];
+			.Take(rows)];
 }

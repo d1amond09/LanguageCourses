@@ -337,7 +337,7 @@ public class Program
 			searchData.City = context.Request.Query["city"];
 		}
 
-		IStudentService? cachedStudentsService = context.RequestServices.GetService<IStudentService>();
+		IStudentService? cachedStudentsService = context.RequestServices.GetService<IServiceManager>()?.StudentService;
 
 		cachedStudentsService?.AddStudentsByCondition(
 			"Students20",
@@ -350,7 +350,7 @@ public class Program
 			Expires = DateTimeOffset.UtcNow.AddDays(30)
 		});
 
-		string tableHtml = "<TABLE BORDER=1>";
+		string tableHtml = "<TABLE BORDER=1 cellspacing=0>";
 		tableHtml += "<TH><TD>Фамилия</TD><TD>Имя</TD><TD>Адрес</TD><TD>Дата рождения</TD><TD>Номер паспорта</TD><TD>Номер телефона</TD></TH>";
 
 		foreach (Student student in students ?? Enumerable.Empty<Student>())
@@ -365,7 +365,7 @@ public class Program
 			tableHtml += $"<TD>{student.Phone}</TD>";
 			tableHtml += "</TR>";
 		}
-		tableHtml += "</students>";
+		tableHtml += "</TABLE>";
 
 		string selectedCity = searchData.City ?? string.Empty;
 
@@ -405,8 +405,8 @@ public class Program
 			searchData.City = context.Request.Query["city"];
 		}
 
-		IStudentService? cachedStudentsService = context.RequestServices.GetService<IStudentService>();
-		
+		IStudentService? cachedStudentsService = context.RequestServices.GetService<IServiceManager>()?.StudentService;
+
 		cachedStudentsService?.AddStudentsByCondition(
 			"Students20",
 			x => x.Address.Contains(searchData.City) &&
@@ -415,7 +415,7 @@ public class Program
 
 		context.Session.SetString("searchData", JsonSerializer.Serialize(searchData));
 
-		string tableHtml = "<TABLE BORDER=1>";
+		string tableHtml = "<TABLE BORDER=1 cellspacing=0>";
 		tableHtml += "<TH><TD>Фамилия</TD><TD>Имя</TD><TD>Адрес</TD><TD>Дата рождения</TD><TD>Номер паспорта</TD><TD>Номер телефона</TD></TH>";
 
 		foreach (Student student in students ?? [])
@@ -430,8 +430,8 @@ public class Program
 			tableHtml += $"<TD>{student.Phone}</TD>";
 			tableHtml += "</TR>";
 		}
-		tableHtml += "</students>";
-		
+		tableHtml += "</TABLE>";
+
 		string selectedCity = searchData.City ?? string.Empty;
 
 		string formHtml = "<HTML><HEAD><TITLE>Форма поиска 2</TITLE></HEAD>" +
