@@ -5,23 +5,23 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LanguageCourses.WebAPI.Controllers;
 
-[Route("api/students")]
+[Route("api/courses")]
 [ApiController]
-public class StudentController(IServiceManager service) : ControllerBase
+public class CourseController(IServiceManager service) : ControllerBase
 {
 	private readonly IServiceManager _service = service;
 
 	[HttpGet]
-	public async Task<IActionResult> GetStudents()
+	public async Task<IActionResult> GetCourses()
 	{
-		var students = await _service.StudentService.GetAllStudentsAsync(trackChanges: false);
-		return Ok(students);
+		var Courses = await _service.CourseService.GetAllCoursesAsync(trackChanges: false);
+		return Ok(Courses);
 	}
 
 	[HttpGet("{id:guid}")]
 	public IActionResult GetCompany(Guid id)
 	{
-		var company = _service.StudentService.GetStudentAsync(id, trackChanges: false);
+		var company = _service.CourseService.GetCourseAsync(id, trackChanges: false);
 		return Ok(company);
 	}
 

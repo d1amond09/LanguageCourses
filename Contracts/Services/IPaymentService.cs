@@ -5,5 +5,6 @@ namespace Contracts.Services;
 
 public interface IPaymentService
 {
-	
+	public async Task<IEnumerable<Payment>> GetAllPaymentsAsync(bool trackChanges);
+	public async Task<Payment?> GetPaymentAsync(Guid id, bool trackChanges);
 }
