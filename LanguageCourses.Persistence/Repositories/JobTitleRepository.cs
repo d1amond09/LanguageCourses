@@ -11,22 +11,12 @@ public class JobTitleRepository(LanguageCoursesContext appDbContext) :
 
 	public void DeleteJobTitle(JobTitle JobTitle) => Delete(JobTitle);
 
-	public IEnumerable<Employee> GetJobtitleEmployeeAsync(bool trackChanges = false)
-	{
-		return FindAll(trackChanges).Select(x => x.Employees).First();
-	}
-
 	public JobTitle? GetJobTitleByName(string name) =>
 		FindAll().FirstOrDefault(x => x.Name == name);
 
-	public async Task<IEnumerable<JobTitle>> GetJobTitlesWithSalaryMoreThanAsync(decimal salary, bool trackChanges = false) =>
-		await FindAll(trackChanges)
-			.Where(c => c.Salary > salary)
-			.OrderBy(c => c.Name)
-			.ToListAsync();
-
 	public async Task<IEnumerable<JobTitle>> GetAllJobTitlesAsync(bool trackChanges = false) =>
 		await FindAll(trackChanges)
+			.Include(c => c.Employees)
 			.OrderBy(c => c.Name)
 			.ToListAsync();
 	public async Task<JobTitle?> GetJobTitleAsync(Guid jobTitleId, bool trackChanges = false) =>

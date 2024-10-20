@@ -11,31 +11,9 @@ public class PaymentRepository(LanguageCoursesContext appDbContext) :
 
 	public void DeletePayment(Payment Payment) => Delete(Payment);
 
-	public async Task<IEnumerable<(string Purpose, decimal AvgAmount)>> GetPaymentsByPurposeAsync(bool trackChanges = false)
-	{
-		var query = FindAll(trackChanges);
-
-		if (!trackChanges)
-		{
-			query = query.AsNoTracking();
-		}
-
-		var result = await query
-			.GroupBy(e => e.Purpose)
-			.Select(gr => new
-			{
-				Purpose = gr.Key,
-				AvgAmount = gr.Average(e => e.Amount)
-			})
-			.ToListAsync();
-
-		return result.Select(r => (r.Purpose, r.AvgAmount));
-	}
-
-
-
 	public async Task<IEnumerable<Payment>> GetAllPaymentsAsync(bool trackChanges = false) =>
 		await FindAll(trackChanges)
+			.Include(x => x.Student)
 			.OrderBy(c => c.Purpose)
 			.ToListAsync();
 	public async Task<Payment?> GetPaymentAsync(Guid paymentId, bool trackChanges = false) =>

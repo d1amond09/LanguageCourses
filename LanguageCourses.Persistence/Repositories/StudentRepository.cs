@@ -14,16 +14,10 @@ public class StudentRepository(LanguageCoursesContext appDbContext) :
 
 	public async Task<IEnumerable<Student>> GetAllStudentsAsync(bool trackChanges = false) =>
 		await FindAll(trackChanges)
+			.Include(s => s.Payments)
+			.Include(c => c.Courses)
 			.OrderBy(c => c.Name)
 			.ToListAsync();
-
-	public Student? GetStudentByPassport(string passport, bool trackChanges = false) =>
-		FindByCondition(c => c.PassportNumber.Equals(passport), trackChanges)
-			.SingleOrDefault();
-
-	public async Task<Student?> GetStudentByPassportAsync(string passport, bool trackChanges = false) =>
-		await FindByCondition(c => c.PassportNumber.Equals(passport), trackChanges)
-			.SingleOrDefaultAsync();
 
 	public async Task<Student?> GetStudentAsync(Guid studentId, bool trackChanges = false) =>
 		await FindByCondition(c => c.StudentId.Equals(studentId), trackChanges)
