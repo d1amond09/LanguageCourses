@@ -1,5 +1,4 @@
-﻿using System;
-using Contracts.Repositories;
+﻿using Contracts.Repositories;
 using Contracts.Services;
 using LanguageCourses.Application.Services;
 using LanguageCourses.Persistence;
@@ -30,7 +29,7 @@ public static class ServiceExtensions
 
 	public static void ConfigureRepositoryManager(this IServiceCollection services) =>
 		services.AddScoped<IRepositoryManager, RepositoryManager>();
-	
+
 	public static void ConfigureServiceManager(this IServiceCollection services) =>
 		services.AddScoped<IServiceManager, ServiceManager>();
 }

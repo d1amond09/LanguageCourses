@@ -12,5 +12,5 @@ public interface IStudentService
 	public IEnumerable<Student>? GetStudents(string cacheKey);
 
 	public void AddStudentsByCondition(string cacheKey, Expression<Func<Student, bool>> expression);
-	
+
 }

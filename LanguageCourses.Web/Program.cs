@@ -1,23 +1,14 @@
-using System.Collections.Frozen;
-using System.Reflection.PortableExecutable;
 using System.Text.Json;
-using System.Threading.Tasks;
 using Contracts.Services;
-using LanguageCourses.Application.Services;
 using LanguageCourses.Domain.Entities;
 using LanguageCourses.Web.Extensions;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Hosting;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace LanguageCourses.Web;
 
 public class Program
 {
-	public static async Task Main(string[] args)
+	public static void Main(string[] args)
 	{
 		var builder = WebApplication.CreateBuilder(args);
 
@@ -140,7 +131,7 @@ public class Program
 				HtmlString += "<TD>" + student.PassportNumber + "</TD>";
 				HtmlString += "<TD>" + student.Phone + "</TD>";
 				HtmlString += "<TD>";
-				foreach(string courseName in student.Courses.Select(x => x.Name))
+				foreach (string courseName in student.Courses.Select(x => x.Name))
 					HtmlString += courseName + "<BR>";
 				HtmlString += "</TD>";
 				HtmlString += "<TD>";

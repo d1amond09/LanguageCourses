@@ -27,7 +27,7 @@ public sealed class StudentService(IRepositoryManager rep, IMemoryCache memoryCa
 			AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(248)
 		});
 	}
-	
+
 	public void AddStudentsByCondition(string cacheKey, Expression<Func<Student, bool>> expression)
 	{
 		IEnumerable<Student> students = _rep.Students.FindByCondition(expression).Take(_rowsNumber);

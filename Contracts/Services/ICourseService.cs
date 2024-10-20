@@ -1,5 +1,5 @@
-﻿using LanguageCourses.Domain.Entities;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
+using LanguageCourses.Domain.Entities;
 
 namespace Contracts.Services;
 
