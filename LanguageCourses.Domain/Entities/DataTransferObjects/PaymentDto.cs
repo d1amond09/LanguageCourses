@@ -1,6 +1,6 @@
-﻿namespace LanguageCourses.Domain.Entities;
+﻿namespace LanguageCourses.Domain.Entities.DataTransferObjects;
 
-public class Payment
+public record PaymentDto
 {
 	public Guid PaymentId { get; set; }
 
@@ -11,6 +11,4 @@ public class Payment
 	public decimal Amount { get; set; }
 
 	public Guid StudentId { get; set; }
-
-	public virtual Student Student { get; set; } = null!;
 }

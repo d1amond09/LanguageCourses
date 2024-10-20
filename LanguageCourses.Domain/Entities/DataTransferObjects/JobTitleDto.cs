@@ -1,6 +1,6 @@
-﻿namespace LanguageCourses.Domain.Entities;
+﻿namespace LanguageCourses.Domain.Entities.DataTransferObjects;
 
-public class JobTitle
+public record JobTitleDto
 {
 	public Guid JobTitleId { get; set; }
 
@@ -11,6 +11,4 @@ public class JobTitle
 	public string? Responsibilities { get; set; }
 
 	public string? Requirements { get; set; }
-
-	public virtual ICollection<Employee> Employees { get; set; } = [];
 }

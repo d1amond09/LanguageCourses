@@ -14,8 +14,6 @@ public class StudentRepository(LanguageCoursesContext appDbContext) :
 
 	public async Task<IEnumerable<Student>> GetAllStudentsAsync(bool trackChanges = false) =>
 		await FindAll(trackChanges)
-			.Include(s => s.Payments)
-			.Include(c => c.Courses)
 			.OrderBy(c => c.Name)
 			.ToListAsync();
 

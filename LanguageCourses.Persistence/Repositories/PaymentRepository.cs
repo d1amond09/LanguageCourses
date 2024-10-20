@@ -13,7 +13,6 @@ public class PaymentRepository(LanguageCoursesContext appDbContext) :
 
 	public async Task<IEnumerable<Payment>> GetAllPaymentsAsync(bool trackChanges = false) =>
 		await FindAll(trackChanges)
-			.Include(x => x.Student)
 			.OrderBy(c => c.Purpose)
 			.ToListAsync();
 	public async Task<Payment?> GetPaymentAsync(Guid paymentId, bool trackChanges = false) =>

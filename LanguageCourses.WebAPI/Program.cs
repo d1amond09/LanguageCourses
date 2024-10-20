@@ -34,8 +34,15 @@ public class Program
 		services.ConfigureCors();
 		services.ConfigureIISIntegration();
 		services.ConfigureLoggerService();
+		services.AddAutoMapper(typeof(Program));
 
-		services.AddControllers();
+		services.AddControllers(config =>
+		{
+			config.RespectBrowserAcceptHeader = true;
+			config.ReturnHttpNotAcceptable = true;
+		}).AddXmlDataContractSerializerFormatters()
+		 .AddCustomCSVFormatter();
+
 
 		services.ConfigureSqlContext(configuration);
 

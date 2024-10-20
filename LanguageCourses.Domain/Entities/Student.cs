@@ -1,6 +1,6 @@
 ﻿namespace LanguageCourses.Domain.Entities;
 
-public partial class Student
+public class Student
 {
 	public Guid StudentId { get; set; } = new();
 

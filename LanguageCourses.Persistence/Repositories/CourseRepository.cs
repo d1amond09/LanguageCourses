@@ -13,8 +13,6 @@ public class CourseRepository(LanguageCoursesContext appDbContext) :
 
 	public async Task<IEnumerable<Course>> GetAllCoursesAsync(bool trackChanges = false) =>
 		await FindAll(trackChanges)
-			.Include(x => x.Employee)
-			.Include(c => c.Students)
 			.OrderBy(c => c.Name)
 			.ToListAsync();
 	public async Task<Course?> GetCourseAsync(Guid courseId, bool trackChanges = false) =>

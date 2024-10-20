@@ -1,6 +1,6 @@
-﻿namespace LanguageCourses.Domain.Entities;
+﻿namespace LanguageCourses.Domain.Entities.DataTransferObjects;
 
-public class Course
+public record CourseDto
 {
 	public Guid CourseId { get; set; }
 
@@ -21,8 +21,4 @@ public class Course
 	public int Hours { get; set; }
 
 	public decimal TuitionFee { get; set; }
-
-	public virtual Employee Employee { get; set; } = null!;
-
-	public virtual ICollection<Student> Students { get; set; } = [];
 }

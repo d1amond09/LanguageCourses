@@ -1,6 +1,6 @@
-﻿namespace LanguageCourses.Domain.Entities;
+﻿namespace LanguageCourses.Domain.Entities.DataTransferObjects;
 
-public class Employee
+public record EmployeeDto
 {
 	public Guid EmployeeId { get; set; }
 
@@ -21,8 +21,4 @@ public class Employee
 	public string PassportNumber { get; set; } = null!;
 
 	public string Education { get; set; } = null!;
-
-	public virtual ICollection<Course> Courses { get; set; } = [];
-
-	public virtual JobTitle JobTitle { get; set; } = null!;
 }

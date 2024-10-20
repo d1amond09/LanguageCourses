@@ -1,14 +1,15 @@
-﻿using Contracts;
+﻿using AutoMapper;
+using Contracts;
 using Contracts.Services;
 using LanguageCourses.Domain.Entities;
 
 namespace LanguageCourses.Application.Services;
 
-internal sealed class JobTitleService(IRepositoryManager rep, ILoggerManager logger) : IJobTitleService
+internal sealed class JobTitleService(IRepositoryManager rep, ILoggerManager logger, IMapper mapper) : IJobTitleService
 {
 	private readonly IRepositoryManager _rep = rep;
 	private readonly ILoggerManager _logger = logger;
-
+	private readonly IMapper _mapper = mapper;
 	public async Task<IEnumerable<JobTitle>> GetAllJobTitlesAsync(bool trackChanges) =>
 		await _rep.JobTitles.GetAllJobTitlesAsync(trackChanges);
 

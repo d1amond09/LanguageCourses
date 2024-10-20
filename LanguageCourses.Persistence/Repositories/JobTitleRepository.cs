@@ -16,7 +16,6 @@ public class JobTitleRepository(LanguageCoursesContext appDbContext) :
 
 	public async Task<IEnumerable<JobTitle>> GetAllJobTitlesAsync(bool trackChanges = false) =>
 		await FindAll(trackChanges)
-			.Include(c => c.Employees)
 			.OrderBy(c => c.Name)
 			.ToListAsync();
 	public async Task<JobTitle?> GetJobTitleAsync(Guid jobTitleId, bool trackChanges = false) =>

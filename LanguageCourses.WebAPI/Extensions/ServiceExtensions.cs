@@ -2,6 +2,7 @@
 using LanguageCourses.Application;
 using LanguageCourses.Persistence;
 using LanguageCourses.Persistence.Repositories;
+using LanguageCourses.WebAPI.Formatters.Output;
 using LoggerService;
 using Microsoft.EntityFrameworkCore;
 
@@ -41,5 +42,8 @@ public static class ServiceExtensions
 
 	public static void ConfigureLoggerService(this IServiceCollection services) =>
 		services.AddSingleton<ILoggerManager, LoggerManager>();
+
+	public static IMvcBuilder AddCustomCSVFormatter(this IMvcBuilder builder) =>
+		builder.AddMvcOptions(config => config.OutputFormatters.Add(new CsvOutputFormatter()));
 
 }
