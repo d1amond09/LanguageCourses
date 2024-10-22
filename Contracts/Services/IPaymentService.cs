@@ -1,9 +1,10 @@
-﻿using LanguageCourses.Domain.Entities;
+﻿using LanguageCourses.Domain.DataTransferObjects;
 
 namespace Contracts.Services;
 
 public interface IPaymentService
 {
-	Task<IEnumerable<Payment>> GetAllPaymentsAsync(bool trackChanges);
-	Task<Payment?> GetPaymentAsync(Guid id, bool trackChanges);
+	Task<IEnumerable<PaymentDto>> GetAllPaymentsAsync(bool trackChanges);
+
+	Task<PaymentDto?> GetPaymentAsync(Guid id, bool trackChanges);
 }

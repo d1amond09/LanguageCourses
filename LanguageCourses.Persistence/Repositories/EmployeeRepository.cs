@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LanguageCourses.Persistence.Repositories;
 
-public class EmployeeRepository(LanguageCoursesContext appDbContext) :
+internal class EmployeeRepository(LanguageCoursesContext appDbContext) :
 	RepositoryBase<Employee>(appDbContext), IEmployeeRepository
 {
 	public void CreateEmployee(Employee Employee) => Create(Employee);

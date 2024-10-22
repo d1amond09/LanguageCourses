@@ -22,7 +22,6 @@ public class StudentController(IServiceManager service) : ControllerBase
 	{
 		var student = _service.StudentService.GetStudentAsync(id, trackChanges: false)
 					?? throw new StudentNotFoundException(id);
-
 		return Ok(student);
 	}
 

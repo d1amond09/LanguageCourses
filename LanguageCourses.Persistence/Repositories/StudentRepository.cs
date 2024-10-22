@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LanguageCourses.Persistence.Repositories;
 
-public class StudentRepository(LanguageCoursesContext appDbContext) :
+internal class StudentRepository(LanguageCoursesContext appDbContext) :
 	RepositoryBase<Student>(appDbContext), IStudentRepository
 {
 	public void CreateStudent(Student student) => Create(student);

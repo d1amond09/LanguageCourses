@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LanguageCourses.Persistence.Repositories;
 
-public class JobTitleRepository(LanguageCoursesContext appDbContext) :
+internal class JobTitleRepository(LanguageCoursesContext appDbContext) :
 	RepositoryBase<JobTitle>(appDbContext), IJobTitleRepository
 {
 	public void CreateJobTitle(JobTitle JobTitle) => Create(JobTitle);

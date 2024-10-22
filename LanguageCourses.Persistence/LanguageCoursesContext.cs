@@ -3,17 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LanguageCourses.Persistence;
 
-public partial class LanguageCoursesContext : DbContext
+public partial class LanguageCoursesContext(DbContextOptions<LanguageCoursesContext> options) : DbContext(options)
 {
-	public LanguageCoursesContext()
-	{
-	}
-
-	public LanguageCoursesContext(DbContextOptions<LanguageCoursesContext> options)
-		: base(options)
-	{
-	}
-
 	public virtual DbSet<Course> Courses { get; set; }
 
 	public virtual DbSet<Employee> Employees { get; set; }

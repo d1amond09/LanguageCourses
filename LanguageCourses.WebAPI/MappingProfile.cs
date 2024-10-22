@@ -12,6 +12,6 @@ public class MappingProfile : Profile
 		CreateMap<Course, CourseDto>();
 		CreateMap<Payment, PaymentDto>();
 		CreateMap<JobTitle, JobTitleDto>();
-		CreateMap<Employee, EmployeeDto>();
+		CreateMap<EmployeeDto, EmployeeDto>();
 	}
 }

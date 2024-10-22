@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LanguageCourses.Persistence.Repositories;
 
-public class PaymentRepository(LanguageCoursesContext appDbContext) :
+internal class PaymentRepository(LanguageCoursesContext appDbContext) :
 	RepositoryBase<Payment>(appDbContext), IPaymentRepository
 {
 	public void CreatePayment(Payment Payment) => Create(Payment);

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LanguageCourses.Persistence.Repositories;
 
-public abstract class RepositoryBase<T>(LanguageCoursesContext appDbContext) : IRepositoryBase<T> where T : class
+internal abstract class RepositoryBase<T>(LanguageCoursesContext appDbContext) : IRepositoryBase<T> where T : class
 {
 	protected LanguageCoursesContext AppDbContext = appDbContext;
 

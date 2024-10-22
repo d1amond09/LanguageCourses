@@ -1,9 +1,9 @@
-﻿using LanguageCourses.Domain.Entities;
+﻿using LanguageCourses.Domain.DataTransferObjects;
 
 namespace Contracts.Services;
 
 public interface IJobTitleService
 {
-	Task<IEnumerable<JobTitle>> GetAllJobTitlesAsync(bool trackChanges);
-	Task<JobTitle?> GetJobTitleAsync(Guid id, bool trackChanges);
+	Task<IEnumerable<JobTitleDto>> GetAllJobTitlesAsync(bool trackChanges);
+	Task<JobTitleDto?> GetJobTitleAsync(Guid id, bool trackChanges);
 }

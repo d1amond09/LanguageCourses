@@ -1,9 +1,9 @@
-﻿using LanguageCourses.Domain.Entities;
+﻿using LanguageCourses.Domain.DataTransferObjects;
 
 namespace Contracts.Services;
 
 public interface ICourseService
 {
-	Task<IEnumerable<Course>> GetAllCoursesAsync(bool trackChanges);
-	Task<Course?> GetCourseAsync(Guid id, bool trackChanges);
+	Task<IEnumerable<CourseDto>> GetAllCoursesAsync(bool trackChanges);
+	Task<CourseDto?> GetCourseAsync(Guid id, bool trackChanges);
 }

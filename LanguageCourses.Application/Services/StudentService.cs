@@ -2,7 +2,6 @@
 using Contracts;
 using Contracts.Services;
 using LanguageCourses.Domain.DataTransferObjects;
-using LanguageCourses.Domain.Entities;
 
 namespace LanguageCourses.Application.Services;
 
@@ -19,7 +18,11 @@ internal sealed class StudentService(IRepositoryManager rep, ILoggerManager logg
 		return studentsDto;
 	}
 
-	public async Task<Student?> GetStudentAsync(Guid id, bool trackChanges) =>
-		await _rep.Students.GetStudentAsync(id, trackChanges);
+	public async Task<StudentDto?> GetStudentAsync(Guid id, bool trackChanges)
+	{
+		var student = await _rep.Students.GetStudentAsync(id, trackChanges);
+		var studentDto = _mapper.Map<StudentDto>(student);
+		return studentDto;
+	}
 
 }
