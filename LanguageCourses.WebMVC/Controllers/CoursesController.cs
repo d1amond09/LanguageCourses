@@ -9,6 +9,7 @@ public class CoursesController(IServiceManager service) : Controller
     private readonly IServiceManager _service = service;
 
     [HttpGet]
+    [ResponseCache(Duration = 248, Location = ResponseCacheLocation.Any, NoStore = false)]
     public async Task<IActionResult> Index()
     {
         var courses = await _service.CourseService.GetAllCoursesAsync(trackChanges: false);
@@ -16,12 +17,13 @@ public class CoursesController(IServiceManager service) : Controller
     }
 
     [HttpGet]
-    public IActionResult Details(Guid id)
+    [ResponseCache(Duration = 248, Location = ResponseCacheLocation.Any, NoStore = false)]
+    public async Task<IActionResult> Details(Guid id)
     {
-        var course = _service.CourseService.GetCourseAsync(id, trackChanges: false)
+        var course = await _service.CourseService.GetCourseAsync(id, trackChanges: false)
             ?? throw new CourseNotFoundException(id);
 
-        return Ok(course);
+        return View(course);
     }
 
 }

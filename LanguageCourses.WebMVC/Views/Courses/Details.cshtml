@@ -1,0 +1,45 @@
+﻿@model LanguageCourses.Domain.DataTransferObjects.CourseDto
+@{
+    Layout = "_Layout";
+}
+
+<h2>Детали курса: @Model.Name</h2>
+
+<div>
+    <h4>ID</h4>
+    <p>@Model.CourseId</p>
+</div>
+<div>
+    <h4>Программа обучения</h4>
+    <p>@Model.TrainingProgram</p>
+</div>
+<div>
+    <h4>Преподаватель</h4>
+    <p>@Model.Employee?.ToString()</p>
+</div>
+<div>
+    <h4>Описание</h4>
+    <p>@(Model.Description ?? "Нет описания")</p>
+</div>
+<div>
+    <h4>Интенсивность</h4>
+    <p>@Model.Intensity</p>
+</div>
+<div>
+    <h4>Размер группы</h4>
+    <p>@Model.GroupSize</p>
+</div>
+<div>
+    <h4>Доступные места</h4>
+    <p>@Model.AvailableSeats</p>
+</div>
+<div>
+    <h4>Часы</h4>
+    <p>@Model.Hours</p>
+</div>
+<div>
+    <h4>Стоимость обучения</h4>
+    <p>@Model.TuitionFee.ToString("F2")</p>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary">Назад к списку</a>

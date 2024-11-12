@@ -1,0 +1,41 @@
+﻿@model IEnumerable<LanguageCourses.Domain.DataTransferObjects.CourseDto>
+@{
+    Layout = "_Layout";
+}
+
+<h2>Список Курсов</h2>
+
+<a asp-action="Create" class="btn btn-primary">Добавить курс</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Имя курса</th>
+            <th>Программа обучения</th>
+            <th>Интенсивность</th>
+            <th>Размер группы</th>
+            <th>Доступные места</th>
+            <th>Часы</th>
+            <th>Стоимость обучения</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var course in Model)
+        {
+            <tr>
+                <td>@course.Name</td>
+                <td>@course.TrainingProgram</td>
+                <td>@(course.Description ?? "Нет описания")</td>
+                <td>@course.Intensity</td>
+                <td>@course.GroupSize</td>
+                <td>@course.AvailableSeats</td>
+                <td>@course.Hours</td>
+                <td>@course.TuitionFee.ToString("F2")</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@course.CourseId">Подробнее</a> |
+                    <a asp-action="Delete" asp-route-id="@course.CourseId">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

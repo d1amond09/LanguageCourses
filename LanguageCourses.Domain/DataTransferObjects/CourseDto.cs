@@ -1,12 +1,15 @@
-﻿namespace LanguageCourses.Domain.DataTransferObjects;
+﻿using LanguageCourses.Domain.Entities;
+
+namespace LanguageCourses.Domain.DataTransferObjects;
 
 public record CourseDto
 {
 	public Guid CourseId { get; set; }
 
 	public Guid EmployeeId { get; set; }
+    public Employee? Employee { get; set; }
 
-	public string Name { get; set; } = null!;
+    public string Name { get; set; } = null!;
 
 	public string TrainingProgram { get; set; } = null!;
 

@@ -25,4 +25,9 @@ public class Employee
 	public virtual ICollection<Course> Courses { get; set; } = [];
 
 	public virtual JobTitle JobTitle { get; set; } = null!;
+
+    public override string ToString()
+    {
+		return $"{Surname} {Name} {Midname}";
+    }
 }
