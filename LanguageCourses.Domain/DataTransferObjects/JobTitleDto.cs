@@ -1,4 +1,6 @@
-﻿namespace LanguageCourses.Domain.DataTransferObjects;
+﻿using LanguageCourses.Domain.Entities;
+
+namespace LanguageCourses.Domain.DataTransferObjects;
 
 public record JobTitleDto
 {
@@ -11,4 +13,5 @@ public record JobTitleDto
 	public string? Responsibilities { get; set; }
 
 	public string? Requirements { get; set; }
+    public ICollection<EmployeeDto>? Employees { get; set; } 
 }

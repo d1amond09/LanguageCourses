@@ -26,8 +26,4 @@ public class Employee
 
 	public virtual JobTitle JobTitle { get; set; } = null!;
 
-    public override string ToString()
-    {
-		return $"{Surname} {Name} {Midname}";
-    }
 }

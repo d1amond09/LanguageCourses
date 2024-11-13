@@ -1,0 +1,45 @@
+﻿@model LanguageCourses.Domain.DataTransferObjects.JobTitleDto
+@{
+    Layout = "_Layout";
+}
+
+<h2>Детали должности: @Model.Name</h2>
+
+<div>
+    <h4>ID</h4>
+    <p>@Model.JobTitleId</p>
+</div>
+<div>
+    <h4>Название должности</h4>
+    <p>@Model.Name</p>
+</div>
+<div>
+    <h4>Зарплата</h4>
+    <p>@Model.Salary.ToString("C2")</p> 
+</div>
+<div>
+    <h4>Обязанности</h4>
+    <p>@(Model.Responsibilities ?? "Нет информации об обязанностях")</p>
+</div>
+<div>
+    <h4>Требования</h4>
+    <p>@(Model.Requirements ?? "Нет информации о требованиях")</p>
+</div>
+<div>
+    <h4>Список сотрудников</h4>
+    @if (Model.Employees != null && Model.Employees.Any())
+    {
+        <ul>
+            @foreach (var employee in Model.Employees)
+            {
+                <li>@employee.ToString()</li> 
+            }
+        </ul>
+    }
+    else
+    {
+        <p>Нет сотрудников на данной должности.</p>
+    }
+</div>
+
+<a asp-action="Index" class="btn btn-secondary">Назад к списку</a>

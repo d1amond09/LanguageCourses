@@ -24,5 +24,10 @@ public record EmployeeDto
 
 	public string? Education { get; set; } 
     public ICollection<CourseDto>? Courses { get; set; }
-    public JobTitleDto? JobTitle { get; set; } 
+    public JobTitleDto? JobTitle { get; set; }
+
+    public override string ToString()
+    {
+        return $"{Surname} {Name} {Midname}";
+    }
 }

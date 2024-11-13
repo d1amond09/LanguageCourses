@@ -21,7 +21,7 @@ internal sealed class JobTitleService(IRepositoryManager rep, ILoggerManager log
 
 	public async Task<JobTitleDto?> GetJobTitleAsync(Guid id, bool trackChanges)
 	{
-		var jobtitle = await _rep.JobTitles.GetAllJobTitlesAsync(trackChanges);
+		var jobtitle = await _rep.JobTitles.GetJobTitleAsync(id, trackChanges);
 		var jobtitleDto = _mapper.Map<JobTitleDto>(jobtitle);
 		return jobtitleDto;
 	}
