@@ -1,0 +1,58 @@
+﻿@model LanguageCourses.Domain.DataTransferObjects.EmployeeDto
+@{
+    Layout = "_Layout";
+}
+
+<h2>Детали сотрудника: @Model.Name @Model.Surname</h2>
+
+<div>
+    <h4>ID</h4>
+    <p>@Model.EmployeeId</p>
+</div>
+<div>
+    <h4>Должность</h4>
+    <p>@Model.JobTitle?.Name</p> 
+</div>
+<div>
+    <h4>Фамилия</h4>
+    <p>@Model.Surname</p>
+</div>
+<div>
+    <h4>Имя</h4>
+    <p>@Model.Name</p>
+</div>
+<div>
+    <h4>Отчество</h4>
+    <p>@Model.Midname</p>
+</div>
+<div>
+    <h4>Дата рождения</h4>
+    <p>@Model.BirthDate.ToString("d")</p>
+</div>
+<div>
+    <h4>Адрес</h4>
+    <p>@(Model.Address ?? "Нет адреса")</p>
+</div>
+<div>
+    <h4>Телефон</h4>
+    <p>@(Model.Phone ?? "Нет телефона")</p>
+</div>
+<div>
+    <h4>Номер паспорта</h4>
+    <p>@(Model.PassportNumber ?? "Нет номера паспорта")</p>
+</div>
+<div>
+    <h4>Образование</h4>
+    <p>@(Model.Education ?? "Нет информации об образовании")</p>
+</div>
+<div>
+    <h4>Курсы</h4>
+    <ul>
+    @foreach (var course in Model.Courses)
+    {
+        <li>@(course.Name) (@(course.TrainingProgram)) </li>
+    }
+    </ul>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary">Назад к списку</a>

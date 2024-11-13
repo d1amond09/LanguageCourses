@@ -7,7 +7,7 @@ public record CourseDto
 	public Guid CourseId { get; set; }
 
 	public Guid EmployeeId { get; set; }
-    public Employee? Employee { get; set; }
+    public EmployeeDto? Employee { get; set; }
 
     public string Name { get; set; } = null!;
 

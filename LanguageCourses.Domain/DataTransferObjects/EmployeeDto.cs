@@ -1,4 +1,6 @@
-﻿namespace LanguageCourses.Domain.DataTransferObjects;
+﻿using LanguageCourses.Domain.Entities;
+
+namespace LanguageCourses.Domain.DataTransferObjects;
 
 public record EmployeeDto
 {
@@ -6,19 +8,21 @@ public record EmployeeDto
 
 	public Guid JobTitleId { get; set; }
 
-	public string Surname { get; set; } = null!;
+	public string? Surname { get; set; }
 
-	public string Name { get; set; } = null!;
+	public string? Name { get; set; } 
 
 	public string? Midname { get; set; }
 
-	public DateOnly BirthDate { get; set; }
+    public DateOnly BirthDate { get; set; }
 
 	public string? Address { get; set; }
 
 	public string? Phone { get; set; }
 
-	public string PassportNumber { get; set; } = null!;
+	public string? PassportNumber { get; set; } 
 
-	public string Education { get; set; } = null!;
+	public string? Education { get; set; } 
+    public ICollection<CourseDto>? Courses { get; set; }
+    public JobTitleDto? JobTitle { get; set; } 
 }

@@ -13,15 +13,22 @@ internal class EmployeeRepository(LanguageCoursesContext appDbContext) :
 
 	public async Task<IEnumerable<Employee>> GetAllEmployeesAsync(bool trackChanges = false) =>
 		await FindAll(trackChanges)
+			.Include(e => e.Courses)
+			.Include(e => e.JobTitle)
 			.OrderBy(c => c.Name)
 			.ToListAsync();
 	public async Task<Employee?> GetEmployeeAsync(Guid employeeId, bool trackChanges = false) =>
 		await FindByCondition(c => c.EmployeeId.Equals(employeeId), trackChanges)
-			.SingleOrDefaultAsync();
+            .Include(e => e.Courses)
+            .Include(e => e.JobTitle)
+			.Where(x => x.Courses.Count > 0)
+            .SingleOrDefaultAsync();
 
 	public async Task<IEnumerable<Employee>> GetByIdsAsync(IEnumerable<Guid> ids, bool trackChanges = false) =>
 		await FindByCondition(x => ids.Contains(x.EmployeeId), trackChanges)
-			.ToListAsync();
+            .Include(e => e.Courses)
+            .Include(e => e.JobTitle)
+            .ToListAsync();
 
 	public IEnumerable<Employee> GetEmployeesTop(int rows) =>
 		 [.. FindAll().Include(x => x.JobTitle).Include(x => x.Courses).Where(x => x.Courses.Count > 0).Where(x => x.JobTitle.Name.Contains("преп")).Take(rows)];
