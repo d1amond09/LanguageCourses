@@ -1,0 +1,29 @@
+﻿@model LanguageCourses.Domain.DataTransferObjects.PaymentDto
+@{
+    Layout = "_Layout";
+}
+
+<h2>Детали платежа</h2>
+
+<div>
+    <h4>ID платежа</h4>
+    <p>@Model.PaymentId</p>
+</div>
+<div>
+    <h4>Дата</h4>
+    <p>@Model.Date.ToString("d")</p>
+</div>
+<div>
+    <h4>Цель платежа</h4>
+    <p>@Model.Purpose</p>
+</div>
+<div>
+    <h4>Сумма</h4>
+    <p>@Model.Amount.ToString("C2")</p> 
+</div>
+<div>
+    <h4>Студент</h4>
+    <p>@Model.Student?.ToString()</p>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary">Назад к списку</a>

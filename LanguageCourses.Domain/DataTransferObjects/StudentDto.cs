@@ -17,4 +17,9 @@ public record StudentDto
 	public string Phone { get; init; } = null!;
 
 	public string PassportNumber { get; init; } = null!;
+
+    public override string ToString()
+    {
+        return $"{Surname} {Name} {MidName}";
+    }
 }

@@ -9,6 +9,7 @@ public class PaymentsController(IServiceManager service) : Controller
     private readonly IServiceManager _service = service;
 
     [HttpGet]
+    [ResponseCache(Duration = 248, Location = ResponseCacheLocation.Any, NoStore = false)]
     public async Task<IActionResult> Index()
     {
         var payments = await _service.PaymentService.GetAllPaymentsAsync(trackChanges: false);
@@ -16,9 +17,10 @@ public class PaymentsController(IServiceManager service) : Controller
     }
 
     [HttpGet]
-    public IActionResult Details(Guid id)
+    [ResponseCache(Duration = 248, Location = ResponseCacheLocation.Any, NoStore = false)]
+    public async Task<IActionResult> Details(Guid id)
     {
-        var payment = _service.PaymentService.GetPaymentAsync(id, trackChanges: false)
+        var payment = await _service.PaymentService.GetPaymentAsync(id, trackChanges: false)
             ?? throw new PaymentNotFoundException(id);
         return View(payment);
     }

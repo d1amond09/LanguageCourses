@@ -13,15 +13,19 @@ internal class PaymentRepository(LanguageCoursesContext appDbContext) :
 
 	public async Task<IEnumerable<Payment>> GetAllPaymentsAsync(bool trackChanges = false) =>
 		await FindAll(trackChanges)
+			.Include(p => p.Student)
 			.OrderBy(c => c.Purpose)
+			.Take(1000)
 			.ToListAsync();
 	public async Task<Payment?> GetPaymentAsync(Guid paymentId, bool trackChanges = false) =>
 		await FindByCondition(c => c.PaymentId.Equals(paymentId), trackChanges)
-			.SingleOrDefaultAsync();
+            .Include(p => p.Student)
+            .SingleOrDefaultAsync();
 
 	public async Task<IEnumerable<Payment>> GetByIdsAsync(IEnumerable<Guid> ids, bool trackChanges = false) =>
 		await FindByCondition(x => ids.Contains(x.PaymentId), trackChanges)
-			.ToListAsync();
+			.Include(p => p.Student)
+            .ToListAsync();
 
 	public IEnumerable<Payment> GetPaymentsTop(int rows) =>
 		 [.. FindAll().Include(x => x.Student).Take(rows)];
