@@ -9,6 +9,7 @@ public class StudentsController(IServiceManager service) : Controller
     private readonly IServiceManager _service = service;
 
     [HttpGet]
+    [ResponseCache(Duration = 248, Location = ResponseCacheLocation.Any, NoStore = false)]
     public async Task<IActionResult> Index()
     {
         var students = await _service.StudentService.GetAllStudentsAsync(trackChanges: false);
@@ -16,9 +17,10 @@ public class StudentsController(IServiceManager service) : Controller
     }
 
     [HttpGet]
-    public IActionResult Details(Guid id)
+    [ResponseCache(Duration = 248, Location = ResponseCacheLocation.Any, NoStore = false)]
+    public async Task<IActionResult> Details(Guid id)
     {
-        var student = _service.StudentService.GetStudentAsync(id, trackChanges: false)
+        var student = await _service.StudentService.GetStudentAsync(id, trackChanges: false)
                     ?? throw new StudentNotFoundException(id);
         return View(student);
     }

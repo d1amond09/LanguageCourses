@@ -1,0 +1,73 @@
+﻿@model LanguageCourses.Domain.DataTransferObjects.StudentDto
+@{
+    Layout = "_Layout";
+}
+
+<h2>Детали слушателя: @Model.ToString()</h2>
+
+<div>
+    <h4>ID студента</h4>
+    <p>@Model.StudentId</p>
+</div>
+<div>
+    <h4>Фамилия</h4>
+    <p>@Model.Surname</p>
+</div>
+<div>
+    <h4>Имя</h4>
+    <p>@Model.Name</p>
+</div>
+<div>
+    <h4>Отчество</h4>
+    <p>@Model.MidName</p>
+</div>
+<div>
+    <h4>Дата рождения</h4>
+    <p>@Model.BirthDate.ToString("d")</p>
+</div>
+<div>
+    <h4>Адрес</h4>
+    <p>@Model.Address</p>
+</div>
+<div>
+    <h4>Телефон</h4>
+    <p>@Model.Phone</p>
+</div>
+<div>
+    <h4>Номер паспорта</h4>
+    <p>@Model.PassportNumber</p>
+</div>
+<div>
+    <h4>Платежи</h4>
+    @if (Model.Payments != null && Model.Payments.Any())
+    {
+        <ul>
+            @foreach (var payment in Model.Payments)
+            {
+                <li>Дата: @payment.Date.ToString("d"), Назначение: @payment.Purpose, Сумма: @payment.Amount.ToString("C2")</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>Нет платежей.</p>
+    }
+</div>
+<div>
+    <h4>Курсы</h4>
+    @if (Model.Courses != null && Model.Courses.Any())
+    {
+        <ul>
+            @foreach (var course in Model.Courses)
+            {
+                <li>@course.Name (@course.TrainingProgram)</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>Нет курсов.</p>
+    }
+</div>
+
+<a asp-action="Index" class="btn btn-secondary">Назад к списку</a>

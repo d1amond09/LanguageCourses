@@ -1,4 +1,6 @@
-﻿namespace LanguageCourses.Domain.DataTransferObjects;
+﻿using LanguageCourses.Domain.Entities;
+
+namespace LanguageCourses.Domain.DataTransferObjects;
 
 public record StudentDto
 {
@@ -17,6 +19,10 @@ public record StudentDto
 	public string Phone { get; init; } = null!;
 
 	public string PassportNumber { get; init; } = null!;
+
+    public ICollection<PaymentDto>? Payments { get; set; } 
+
+    public ICollection<CourseDto>? Courses { get; set; } 
 
     public override string ToString()
     {
