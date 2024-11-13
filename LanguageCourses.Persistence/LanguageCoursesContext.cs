@@ -1,4 +1,5 @@
 ﻿using LanguageCourses.Domain.Entities;
+using LanguageCourses.Persistence.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace LanguageCourses.Persistence;
@@ -170,7 +171,14 @@ public partial class LanguageCoursesContext(DbContextOptions<LanguageCoursesCont
 
 
 		OnModelCreatingPartial(modelBuilder);
-	}
+        modelBuilder.ApplyConfiguration(new CourseConfiguration());
+        modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
+        modelBuilder.ApplyConfiguration(new JobTitleConfiguration());
+        modelBuilder.ApplyConfiguration(new PaymentConfiguration());
+        modelBuilder.ApplyConfiguration(new StudentConfiguration());
+
+        base.OnModelCreating(modelBuilder);
+    }
 
 	partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
