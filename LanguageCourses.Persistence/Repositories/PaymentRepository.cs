@@ -14,7 +14,7 @@ internal class PaymentRepository(LanguageCoursesContext appDbContext) :
 	public async Task<IEnumerable<Payment>> GetAllPaymentsAsync(bool trackChanges = false) =>
 		await FindAll(trackChanges)
 			.Include(p => p.Student)
-			.OrderBy(c => c.Purpose)
+			.OrderBy(c => c.Date)
 			.Take(1000)
 			.ToListAsync();
 	public async Task<Payment?> GetPaymentAsync(Guid paymentId, bool trackChanges = false) =>
