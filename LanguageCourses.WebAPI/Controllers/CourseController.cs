@@ -8,22 +8,22 @@ namespace LanguageCourses.WebAPI.Controllers;
 [ApiController]
 public class CourseController(IServiceManager service) : ControllerBase
 {
-	private readonly IServiceManager _service = service;
+    private readonly IServiceManager _service = service;
 
-	[HttpGet]
-	public async Task<IActionResult> GetCourses()
-	{
-		var courses = await _service.CourseService.GetAllCoursesAsync(trackChanges: false);
-		return Ok(courses);
-	}
+    [HttpGet]
+    public async Task<IActionResult> GetCourses()
+    {
+        var courses = await _service.CourseService.GetAllCoursesAsync(trackChanges: false);
+        return Ok(courses);
+    }
 
-	[HttpGet("{id:guid}")]
-	public IActionResult GetCourse(Guid id)
-	{
-		var course = _service.CourseService.GetCourseAsync(id, trackChanges: false)
-			?? throw new CourseNotFoundException(id);
+    [HttpGet("{id:guid}")]
+    public IActionResult GetCourse(Guid id)
+    {
+        var course = _service.CourseService.GetCourseAsync(id, trackChanges: false)
+            ?? throw new CourseNotFoundException(id);
 
-		return Ok(course);
-	}
+        return Ok(course);
+    }
 
 }

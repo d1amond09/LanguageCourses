@@ -8,21 +8,21 @@ namespace LanguageCourses.WebAPI.Controllers;
 [ApiController]
 public class JobTitleController(IServiceManager service) : ControllerBase
 {
-	private readonly IServiceManager _service = service;
+    private readonly IServiceManager _service = service;
 
-	[HttpGet]
-	public async Task<IActionResult> GetJobTitles()
-	{
-		var jobTitles = await _service.JobTitleService.GetAllJobTitlesAsync(trackChanges: false);
-		return Ok(jobTitles);
-	}
+    [HttpGet]
+    public async Task<IActionResult> GetJobTitles()
+    {
+        var jobTitles = await _service.JobTitleService.GetAllJobTitlesAsync(trackChanges: false);
+        return Ok(jobTitles);
+    }
 
-	[HttpGet("{id:guid}")]
-	public IActionResult GetJobTitle(Guid id)
-	{
-		var jobTitle = _service.JobTitleService.GetJobTitleAsync(id, trackChanges: false)
-			?? throw new JobTitleNotFoundException(id);
-		return Ok(jobTitle);
-	}
+    [HttpGet("{id:guid}")]
+    public IActionResult GetJobTitle(Guid id)
+    {
+        var jobTitle = _service.JobTitleService.GetJobTitleAsync(id, trackChanges: false)
+            ?? throw new JobTitleNotFoundException(id);
+        return Ok(jobTitle);
+    }
 
 }

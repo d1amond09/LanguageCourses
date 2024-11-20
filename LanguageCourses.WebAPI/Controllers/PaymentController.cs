@@ -8,21 +8,21 @@ namespace LanguageCourses.WebAPI.Controllers;
 [ApiController]
 public class PaymentController(IServiceManager service) : ControllerBase
 {
-	private readonly IServiceManager _service = service;
+    private readonly IServiceManager _service = service;
 
-	[HttpGet]
-	public async Task<IActionResult> GetPayments()
-	{
-		var payments = await _service.PaymentService.GetAllPaymentsAsync(trackChanges: false);
-		return Ok(payments);
-	}
+    [HttpGet]
+    public async Task<IActionResult> GetPayments()
+    {
+        var payments = await _service.PaymentService.GetAllPaymentsAsync(trackChanges: false);
+        return Ok(payments);
+    }
 
-	[HttpGet("{id:guid}")]
-	public IActionResult GetPayment(Guid id)
-	{
-		var payment = _service.PaymentService.GetPaymentAsync(id, trackChanges: false)
-			?? throw new PaymentNotFoundException(id);
-		return Ok(payment);
-	}
+    [HttpGet("{id:guid}")]
+    public IActionResult GetPayment(Guid id)
+    {
+        var payment = _service.PaymentService.GetPaymentAsync(id, trackChanges: false)
+            ?? throw new PaymentNotFoundException(id);
+        return Ok(payment);
+    }
 
 }
