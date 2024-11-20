@@ -2,23 +2,19 @@
 
 public record EmployeeDto
 {
-	public Guid EmployeeId { get; set; }
+	public Guid EmployeeId { get; init; }
 
-	public Guid JobTitleId { get; set; }
+	public Guid JobTitleId { get; init; }
 
-	public string Surname { get; set; } = null!;
+	public string? FullName { get; init; }
 
-	public string Name { get; set; } = null!;
+	public DateOnly BirthDate { get; init; }
 
-	public string? Midname { get; set; }
+	public string? Address { get; init; }
 
-	public DateOnly BirthDate { get; set; }
+	public string? Phone { get; init; }
 
-	public string? Address { get; set; }
+	public string? PassportNumber { get; init; } 
 
-	public string? Phone { get; set; }
-
-	public string PassportNumber { get; set; } = null!;
-
-	public string Education { get; set; } = null!;
+	public string? Education { get; init; } 
 }

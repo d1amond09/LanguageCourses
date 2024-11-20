@@ -2,13 +2,13 @@
 
 public record JobTitleDto
 {
-	public Guid JobTitleId { get; set; }
+	public Guid JobTitleId { get; init; }
 
-	public string Name { get; set; } = null!;
+	public string? Name { get; init; }
 
-	public decimal Salary { get; set; }
+	public decimal Salary { get; init; }
 
-	public string? Responsibilities { get; set; }
+	public string? Responsibilities { get; init; }
 
-	public string? Requirements { get; set; }
+	public string? Requirements { get; init; }
 }

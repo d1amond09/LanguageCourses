@@ -2,23 +2,23 @@
 
 public record CourseDto
 {
-	public Guid CourseId { get; set; }
+	public Guid CourseId { get; init; }
 
-	public Guid EmployeeId { get; set; }
+	public Guid EmployeeId { get; init; }
 
-	public string Name { get; set; } = null!;
+	public string? Name { get; init; }
 
-	public string TrainingProgram { get; set; } = null!;
+	public string? TrainingProgram { get; init; }
 
-	public string? Description { get; set; }
+	public string? Description { get; init; }
 
-	public string Intensity { get; set; } = null!;
+	public string? Intensity { get; init; } 
 
-	public int GroupSize { get; set; }
+	public int GroupSize { get; init; }
 
-	public int AvailableSeats { get; set; }
+	public int AvailableSeats { get; init; }
 
-	public int Hours { get; set; }
+	public int Hours { get; init; }
 
-	public decimal TuitionFee { get; set; }
+	public decimal TuitionFee { get; init; }
 }

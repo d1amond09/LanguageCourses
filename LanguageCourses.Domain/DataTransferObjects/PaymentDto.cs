@@ -2,13 +2,13 @@
 
 public record PaymentDto
 {
-	public Guid PaymentId { get; set; }
+	public Guid PaymentId { get; init; }
 
-	public DateOnly Date { get; set; }
+	public DateOnly Date { get; init; }
 
-	public string Purpose { get; set; } = null!;
+	public string? Purpose { get; init; }
 
-	public decimal Amount { get; set; }
+	public decimal Amount { get; init; }
 
-	public Guid StudentId { get; set; }
+	public Guid StudentId { get; init; }
 }
