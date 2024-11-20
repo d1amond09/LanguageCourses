@@ -2,7 +2,7 @@
 
 public record JobTitleDto
 {
-    public Guid JobTitleId { get; init; }
+    public Guid Id { get; init; }
 
     public string? Name { get; init; }
 

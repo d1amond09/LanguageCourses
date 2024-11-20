@@ -2,7 +2,7 @@
 
 public record CourseDto
 {
-    public Guid CourseId { get; init; }
+    public Guid Id { get; init; }
     public Guid EmployeeId { get; init; }
     public EmployeeDto? Employee { get; init; }
     public string? Name { get; init; }

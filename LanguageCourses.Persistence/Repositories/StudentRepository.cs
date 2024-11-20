@@ -18,16 +18,10 @@ internal class StudentRepository(LanguageCoursesContext appDbContext) :
             .ToListAsync();
 
     public async Task<Student?> GetStudentAsync(Guid studentId, bool trackChanges = false) =>
-        await FindByCondition(c => c.StudentId.Equals(studentId), trackChanges)
+        await FindByCondition(c => c.Id.Equals(studentId), trackChanges)
             .SingleOrDefaultAsync();
 
     public async Task<IEnumerable<Student>> GetByIdsAsync(IEnumerable<Guid> ids, bool trackChanges = false) =>
-        await FindByCondition(x => ids.Contains(x.StudentId), trackChanges)
+        await FindByCondition(x => ids.Contains(x.Id), trackChanges)
             .ToListAsync();
-
-    public IEnumerable<Student> GetStudentsTop(int rows) =>
-         [.. FindAll()
-            .Include(s => s.Payments)
-            .Include(c => c.Courses)
-            .Take(rows)];
 }

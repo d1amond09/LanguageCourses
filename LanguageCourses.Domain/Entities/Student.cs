@@ -2,21 +2,21 @@
 
 public class Student
 {
-    public Guid StudentId { get; set; } = new();
+    public Guid Id { get; set; } 
 
-    public string Surname { get; set; } = null!;
+    public string? Surname { get; set; } 
 
-    public string Name { get; set; } = null!;
+    public string? Name { get; set; } 
 
     public string? MidName { get; set; }
 
     public DateOnly BirthDate { get; set; }
 
-    public string Address { get; set; } = null!;
+    public string? Address { get; set; }
 
-    public string Phone { get; set; } = null!;
+    public string? Phone { get; set; } 
 
-    public string PassportNumber { get; set; } = null!;
+    public string? PassportNumber { get; set; } 
 
     public virtual ICollection<Payment> Payments { get; set; } = [];
 

@@ -1,6 +1,9 @@
+using AspNetCoreRateLimit;
 using Contracts;
 using LanguageCourses.WebAPI.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using NLog;
 
 namespace LanguageCourses.WebAPI;
@@ -13,53 +16,87 @@ public class Program
         LogManager.Setup().LoadConfigurationFromFile("nlog.config", true);
 
         ConfigureServices(builder.Services, builder.Configuration);
-
         var app = builder.Build();
         var logger = app.Services.GetRequiredService<ILoggerManager>();
-        app.ConfigureExceptionHandler(logger);
-        if (app.Environment.IsProduction())
-            app.UseHsts();
+
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI(s =>
+            {
+                s.SwaggerEndpoint("./v1/swagger.json", "Product API v1");
+            });
+        }
 
 
         ConfigureApp(app);
 
-        app.UseAuthorization();
         app.MapControllers();
 
         app.Run();
     }
 
-    public static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
+    public static void ConfigureServices(IServiceCollection s, IConfiguration config)
     {
-        services.ConfigureCors();
-        services.ConfigureIISIntegration();
-        services.ConfigureLoggerService();
-        services.AddAutoMapper(typeof(Program));
+        s.AddProblemDetails();
+        s.ConfigureLoggerService();
+        s.ConfigureExceptionHandler();
+        s.ConfigureCors();
 
-        services.AddControllers(config =>
+        s.ConfigureSqlContext(config);
+        s.ConfigureRepositoryManager();
+        s.ConfigureMediatR();
+
+        s.ConfigureAutoMapper();
+        s.ConfigureFluentValidation();
+
+        s.ConfigureResponseCaching();
+        s.ConfigureHttpCacheHeaders();
+        s.AddMemoryCache();
+
+        s.AddEndpointsApiExplorer();
+        s.ConfigureSwagger();
+
+        //s.AddJwtAuthenticationConfiguration(config);
+
+        s.ConfigureDataShaping();
+        s.ConfigureHATEOAS();
+
+        s.ConfigureRateLimitingOptions();
+        s.AddHttpContextAccessor();
+
+        s.AddControllers(config =>
         {
             config.RespectBrowserAcceptHeader = true;
             config.ReturnHttpNotAcceptable = true;
-        }).AddXmlDataContractSerializerFormatters()
-         .AddCustomCSVFormatter();
+            config.CacheProfiles.Add("120SecondsDuration", new CacheProfile
+            {
+                Duration = 120
+            });
+        }).AddNewtonsoftJson()
+        .AddXmlDataContractSerializerFormatters();
 
+        s.AddCustomMediaTypes();
 
-        services.ConfigureSqlContext(configuration);
-
-        services.ConfigureRepositoryManager();
-        services.ConfigureServiceManager();
+        s.AddAuthorization();
     }
 
     public static void ConfigureApp(IApplicationBuilder app)
     {
+        app.UseExceptionHandler();
+        app.UseIpRateLimiting();
+        app.UseCors("CorsPolicy");
+        app.UseResponseCaching();
+        app.UseHttpCacheHeaders();
         app.UseHttpsRedirection();
         app.UseStaticFiles();
-
         app.UseForwardedHeaders(new ForwardedHeadersOptions
         {
             ForwardedHeaders = ForwardedHeaders.All
         });
+        app.UseRouting();
 
-        app.UseCors("CorsPolicy");
+
+        app.UseAuthorization();
     }
 }

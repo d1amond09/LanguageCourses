@@ -16,11 +16,11 @@ internal class PaymentRepository(LanguageCoursesContext appDbContext) :
             .OrderBy(c => c.Purpose)
             .ToListAsync();
     public async Task<Payment?> GetPaymentAsync(Guid paymentId, bool trackChanges = false) =>
-        await FindByCondition(c => c.PaymentId.Equals(paymentId), trackChanges)
+        await FindByCondition(c => c.Id.Equals(paymentId), trackChanges)
             .SingleOrDefaultAsync();
 
     public async Task<IEnumerable<Payment>> GetByIdsAsync(IEnumerable<Guid> ids, bool trackChanges = false) =>
-        await FindByCondition(x => ids.Contains(x.PaymentId), trackChanges)
+        await FindByCondition(x => ids.Contains(x.Id), trackChanges)
             .ToListAsync();
 
     public IEnumerable<Payment> GetPaymentsTop(int rows) =>

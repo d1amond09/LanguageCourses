@@ -2,15 +2,15 @@
 
 public class Payment
 {
-    public Guid PaymentId { get; set; }
+    public Guid Id { get; set; }
 
     public DateOnly Date { get; set; }
 
-    public string Purpose { get; set; } = null!;
+    public string? Purpose { get; set; }
 
-    public decimal Amount { get; set; }
+    public double Amount { get; set; }
 
     public Guid StudentId { get; set; }
 
-    public virtual Student Student { get; set; } = null!;
+    public virtual Student? Student { get; set; } 
 }

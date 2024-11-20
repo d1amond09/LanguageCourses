@@ -44,7 +44,7 @@ public class CsvOutputFormatter : TextOutputFormatter
 
     private static void FormatCsv(StringBuilder buffer, StudentDto student)
     {
-        buffer.AppendLine($"{student.StudentId},\"{student.Surname},\"{student.Name},\"{student.MidName},\"{student.PassportNumber},\"{student.Address},\"{student.BirthDate},\"{student.Phone}\"");
+        buffer.AppendLine($"{student.Id},\"{student.FullName},\"{student.PassportNumber},\"{student.Address},\"{student.BirthDate},\"{student.Phone}\"");
     }
 }
 

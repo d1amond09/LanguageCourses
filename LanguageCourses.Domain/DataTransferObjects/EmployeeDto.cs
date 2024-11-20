@@ -4,7 +4,7 @@ namespace LanguageCourses.Domain.DataTransferObjects;
 
 public record EmployeeDto
 {
-    public Guid EmployeeId { get; init; }
+    public Guid Id { get; init; }
     public Guid JobTitleId { get; init; }
     public JobTitle? JobTitle { get; init; }
 

@@ -8,7 +8,11 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Routing.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Net.Http.Headers" Version="8.0.11" />
   </ItemGroup>
 
   <ItemGroup>

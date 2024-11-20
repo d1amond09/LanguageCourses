@@ -19,13 +19,10 @@ internal class JobTitleRepository(LanguageCoursesContext appDbContext) :
             .OrderBy(c => c.Name)
             .ToListAsync();
     public async Task<JobTitle?> GetJobTitleAsync(Guid jobTitleId, bool trackChanges = false) =>
-        await FindByCondition(c => c.JobTitleId.Equals(jobTitleId), trackChanges)
+        await FindByCondition(c => c.Id.Equals(jobTitleId), trackChanges)
             .SingleOrDefaultAsync();
 
     public async Task<IEnumerable<JobTitle>> GetByIdsAsync(IEnumerable<Guid> ids, bool trackChanges = false) =>
-        await FindByCondition(x => ids.Contains(x.JobTitleId), trackChanges)
+        await FindByCondition(x => ids.Contains(x.Id), trackChanges)
             .ToListAsync();
-
-    public IEnumerable<JobTitle> GetJobTitlesTop(int rows) =>
-         [.. FindAll().Include(c => c.Employees).Where(c => c.Employees.Count > 0).Take(rows)];
 }

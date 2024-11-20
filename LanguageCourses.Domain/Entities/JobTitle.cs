@@ -2,11 +2,11 @@
 
 public class JobTitle
 {
-    public Guid JobTitleId { get; set; }
+    public Guid Id { get; set; }
 
-    public string Name { get; set; } = null!;
+    public string? Name { get; set; }
 
-    public decimal Salary { get; set; }
+    public double Salary { get; set; }
 
     public string? Responsibilities { get; set; }
 

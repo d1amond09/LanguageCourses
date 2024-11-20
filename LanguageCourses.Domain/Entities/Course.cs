@@ -2,17 +2,17 @@
 
 public class Course
 {
-    public Guid CourseId { get; set; }
+    public Guid Id { get; set; }
 
     public Guid EmployeeId { get; set; }
 
-    public string Name { get; set; } = null!;
+    public string? Name { get; set; } 
 
-    public string TrainingProgram { get; set; } = null!;
+    public string? TrainingProgram { get; set; } 
 
     public string? Description { get; set; }
 
-    public string Intensity { get; set; } = null!;
+    public string? Intensity { get; set; } 
 
     public int GroupSize { get; set; }
 
@@ -20,9 +20,9 @@ public class Course
 
     public int Hours { get; set; }
 
-    public decimal TuitionFee { get; set; }
+    public double TuitionFee { get; set; }
 
-    public virtual Employee Employee { get; set; } = null!;
+    public virtual Employee? Employee { get; set; } 
 
     public virtual ICollection<Student> Students { get; set; } = [];
 }

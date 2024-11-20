@@ -1,28 +1,28 @@
 ﻿using Contracts;
 using LanguageCourses.Domain.Exceptions;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LanguageCourses.WebAPI.Controllers;
 
 [Route("api/students")]
+[ApiExplorerSettings(GroupName = "v1")]
+[Consumes("application/json")]
 [ApiController]
-public class StudentController(IServiceManager service) : ControllerBase
+public class StudentsController(ISender sender) : ControllerBase
 {
-    private readonly IServiceManager _service = service;
+    private readonly ISender _sender = sender;
 
     [HttpGet]
     public async Task<IActionResult> GetStudents()
     {
-        var students = await _service.StudentService.GetAllStudentsAsync(trackChanges: false);
-        return Ok(students);
+        throw new NotImplementedException();
     }
 
     [HttpGet("{id:guid}")]
-    public IActionResult GetStudent(Guid id)
+    public IActionResult GetStudents(Guid id)
     {
-        var student = _service.StudentService.GetStudentAsync(id, trackChanges: false)
-                    ?? throw new StudentNotFoundException(id);
-        return Ok(student);
+        throw new NotImplementedException();
     }
 
 }

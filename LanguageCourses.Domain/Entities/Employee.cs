@@ -2,13 +2,13 @@
 
 public class Employee
 {
-    public Guid EmployeeId { get; set; }
+    public Guid Id { get; set; }
 
     public Guid JobTitleId { get; set; }
 
-    public string Surname { get; set; } = null!;
+    public string? Surname { get; set; }
 
-    public string Name { get; set; } = null!;
+    public string? Name { get; set; }
 
     public string? Midname { get; set; }
 
@@ -18,12 +18,12 @@ public class Employee
 
     public string? Phone { get; set; }
 
-    public string PassportNumber { get; set; } = null!;
+    public string? PassportNumber { get; set; } 
 
-    public string Education { get; set; } = null!;
+    public string? Education { get; set; } 
 
     public virtual ICollection<Course> Courses { get; set; } = [];
 
-    public virtual JobTitle JobTitle { get; set; } = null!;
+    public virtual JobTitle? JobTitle { get; set; }
 
 }

@@ -1,28 +1,28 @@
 ﻿using Contracts;
 using LanguageCourses.Domain.Exceptions;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LanguageCourses.WebAPI.Controllers;
 
 [Route("api/payments")]
+[ApiExplorerSettings(GroupName = "v1")]
+[Consumes("application/json")]
 [ApiController]
-public class PaymentController(IServiceManager service) : ControllerBase
+public class PaymentsController(ISender sender) : ControllerBase
 {
-    private readonly IServiceManager _service = service;
+    private readonly ISender _sender = sender;
 
     [HttpGet]
     public async Task<IActionResult> GetPayments()
     {
-        var payments = await _service.PaymentService.GetAllPaymentsAsync(trackChanges: false);
-        return Ok(payments);
+        throw new NotImplementedException();
     }
 
     [HttpGet("{id:guid}")]
-    public IActionResult GetPayment(Guid id)
+    public IActionResult GetPayments(Guid id)
     {
-        var payment = _service.PaymentService.GetPaymentAsync(id, trackChanges: false)
-            ?? throw new PaymentNotFoundException(id);
-        return Ok(payment);
+        throw new NotImplementedException();
     }
 
 }

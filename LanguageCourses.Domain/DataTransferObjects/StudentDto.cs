@@ -2,7 +2,7 @@
 
 public record StudentDto
 {
-    public Guid StudentId { get; init; }
+    public Guid Id { get; init; }
     public string? FullName { get; init; }
 
     public DateOnly BirthDate { get; init; }
