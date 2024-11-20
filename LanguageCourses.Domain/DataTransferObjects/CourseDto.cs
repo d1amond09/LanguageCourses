@@ -24,7 +24,7 @@ public record CourseDto
 
 public record CourseForManipulationDto
 {
-    public EmployeeDto? Employee { get; init; }
+    public Guid EmployeeId { get; init; }
     public string? Name { get; init; }
     public string? TrainingProgram { get; init; }
     public string? Description { get; init; }

@@ -1,5 +1,7 @@
-﻿using System.Text.Json;
+﻿using System.Security.Claims;
+using System.Text.Json;
 using Contracts;
+using LanguageCourses.Application.Commands;
 using LanguageCourses.Application.Queries;
 using LanguageCourses.Domain.DataTransferObjects;
 using LanguageCourses.Domain.Exceptions;
@@ -8,6 +10,7 @@ using LanguageCourses.Domain.RequestFeatures;
 using LanguageCourses.WebAPI.ActionFilters;
 using LanguageCourses.WebAPI.Extensions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LanguageCourses.WebAPI.Controllers;
@@ -50,4 +53,38 @@ public class CoursesController(ISender sender) : ApiControllerBase
         return Ok(products);
     }
 
+    [HttpPost(Name = "CreateCourse")]
+    public async Task<IActionResult> CreateCourse([FromBody] CourseForCreationDto course)
+    {
+        var baseResult = await _sender.Send(new CreateCourseCommand(course));
+
+        if (!baseResult.Success)
+            return ProcessError(baseResult);
+
+        var createdProduct = baseResult.GetResult<CourseDto>();
+
+        return CreatedAtRoute("GetCourse", new { id = createdProduct.Id }, createdProduct);
+    }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> DeleteCourse(Guid id)
+    {
+        var baseResult = await _sender.Send(new DeleteCourseCommand(id, TrackChanges: false));
+
+        if (!baseResult.Success)
+            return ProcessError(baseResult);
+
+        return NoContent();
+    }
+
+    [HttpPut("{id:guid}")]
+    public async Task<IActionResult> UpdateCourse(Guid id, [FromBody] CourseForUpdateDto course)
+    {
+        var baseResult = await _sender.Send(new UpdateCourseCommand(id, course, TrackChanges: true));
+
+        if (!baseResult.Success)
+            return ProcessError(baseResult);
+
+        return NoContent();
+    }
 }

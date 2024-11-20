@@ -88,15 +88,6 @@ public static class ServiceExtensions
 
             newtonsoftJsonOutputFormatter?.SupportedMediaTypes
                 .Add("application/apiroot+json");
-
-            var xmlOutputFormatter = config.OutputFormatters
-                .OfType<XmlDataContractSerializerOutputFormatter>()?.FirstOrDefault();
-
-            xmlOutputFormatter?.SupportedMediaTypes
-                .Add("application/hateoas+xml");
-
-            xmlOutputFormatter?.SupportedMediaTypes
-                .Add("application/apiroot+xml");
         });
     }
 

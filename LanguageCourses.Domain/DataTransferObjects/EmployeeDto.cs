@@ -23,7 +23,7 @@ public record EmployeeDto
 
 public record EmployeeForManipulationDto
 {
-    public JobTitle? JobTitle { get; init; }
+    public Guid JobTitleId { get; init; }
     public string? FullName { get; init; }
     public DateOnly BirthDate { get; init; }
     public string? Address { get; init; }

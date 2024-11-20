@@ -73,8 +73,7 @@ public class Program
             {
                 Duration = 120
             });
-        }).AddNewtonsoftJson()
-        .AddXmlDataContractSerializerFormatters();
+        }).AddNewtonsoftJson();
 
         s.AddCustomMediaTypes();
 

@@ -17,7 +17,7 @@ public record PaymentForManipulationDto
     public DateOnly Date { get; init; }
     public string? Purpose { get; init; }
     public decimal Amount { get; init; }
-    public Student? Student { get; init; }
+    public Guid StudentId { get; init; }
 }
 
 public record PaymentForUpdateDto : PaymentForManipulationDto;
