@@ -1,4 +1,4 @@
-﻿namespace LanguageCourses.Domain.DataTransferObjects;
+﻿namespace LanguageJobTitles.Domain.DataTransferObjects;
 
 public record JobTitleDto
 {
@@ -12,3 +12,14 @@ public record JobTitleDto
 
 	public string? Requirements { get; init; }
 }
+
+public record JobTitleForManipulationDto
+{
+    public string? Name { get; init; }
+    public decimal Salary { get; init; }
+    public string? Responsibilities { get; init; }
+    public string? Requirements { get; init; }
+}
+
+public record JobTitleForUpdateDto : JobTitleForManipulationDto;
+public record JobTitleForCreationDto : JobTitleForManipulationDto;
