@@ -1,5 +1,8 @@
 ﻿using Contracts.Repositories;
 using LanguageCourses.Domain.Entities;
+using LanguageCourses.Domain.RequestFeatures;
+using LanguageCourses.Domain.RequestFeatures.ModelParameters;
+using LanguageCourses.Persistence.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace LanguageCourses.Persistence.Repositories;
@@ -14,10 +17,27 @@ internal class JobTitleRepository(LanguageCoursesContext appDbContext) :
     public JobTitle? GetJobTitleByName(string name) =>
         FindAll().FirstOrDefault(x => x.Name == name);
 
-    public async Task<IEnumerable<JobTitle>> GetAllJobTitlesAsync(bool trackChanges = false) =>
-        await FindAll(trackChanges)
-            .OrderBy(c => c.Name)
-            .ToListAsync();
+    public async Task<PagedList<JobTitle>> GetAllJobTitlesAsync(JobTitleParameters jobTitleParameters, bool trackChanges = false)
+    {
+        var jobTitles =
+            await FindAll(trackChanges)
+                .FilterBySalary(jobTitleParameters.MinSalary, jobTitleParameters.MaxSalary)
+                .Search(jobTitleParameters.SearchTerm)
+                .Sort(jobTitleParameters.OrderBy)
+                .Skip((jobTitleParameters.PageNumber - 1) * jobTitleParameters.PageSize)
+                .Take(jobTitleParameters.PageSize)
+                .ToListAsync();
+
+        var count = await FindAll(trackChanges).CountAsync();
+
+        return new PagedList<JobTitle>(
+            jobTitles,
+            count,
+            jobTitleParameters.PageNumber,
+            jobTitleParameters.PageSize
+        );
+    }
+
     public async Task<JobTitle?> GetJobTitleAsync(Guid jobTitleId, bool trackChanges = false) =>
         await FindByCondition(c => c.Id.Equals(jobTitleId), trackChanges)
             .SingleOrDefaultAsync();

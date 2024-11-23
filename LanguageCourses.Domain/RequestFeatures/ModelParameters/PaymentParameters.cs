@@ -8,12 +8,12 @@ namespace LanguageCourses.Domain.RequestFeatures.ModelParameters;
 
 public class PaymentParameters : RequestParameters
 {
-    public double MinAmount { get; set; } = 0;
-    public double MaxAmount { get; set; } = 99999999.99;
-    public DateOnly MinDate { get; set; } = new DateOnly(1900,1,1);
+    public double MinAmount { get; set; } = minZeroValue;
+    public double MaxAmount { get; set; } = maxDoubleValue;
+    public DateOnly MinDate { get; set; } = new DateOnly(minYear, minMonth, minDay);
     public DateOnly MaxDate { get; set; } = DateOnly.MaxValue;
-    public bool NotValidBirthDateRange => MaxAmount <= MinAmount;
-    public bool NotValidAgeRange => MaxDate <= MinDate;
+    public bool NotValidDateRange => MaxAmount <= MinAmount;
+    public bool NotValidAmountRange => MaxDate <= MinDate;
     public string SearchTerm { get; set; } = string.Empty;
     public PaymentParameters()
     {

@@ -1,11 +1,13 @@
 ﻿using System.Linq.Expressions;
 using LanguageCourses.Domain.Entities;
+using LanguageCourses.Domain.RequestFeatures;
+using LanguageCourses.Domain.RequestFeatures.ModelParameters;
 
 namespace Contracts.Repositories;
 
 public interface IJobTitleRepository
 {
-    Task<IEnumerable<JobTitle>> GetAllJobTitlesAsync(bool trackChanges);
+    Task<PagedList<JobTitle>> GetAllJobTitlesAsync(JobTitleParameters jobTitleParameters, bool trackChanges);
     Task<IEnumerable<JobTitle>> GetByIdsAsync(IEnumerable<Guid> ids, bool trackChanges);
     Task<JobTitle?> GetJobTitleAsync(Guid jobTitleId, bool trackChanges);
     JobTitle? GetJobTitleByName(string name);

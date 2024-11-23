@@ -21,6 +21,12 @@ public class GetPaymentsHandler(IRepositoryManager rep, IMapper mapper, IPayment
 
     public async Task<ApiBaseResponse> Handle(GetPaymentsQuery request, CancellationToken cancellationToken)
     {
+        if (request.LinkParameters.PaymentParameters.NotValidAmountRange)
+            return new ApiMaxAmountRangeBadRequestResponse();
+
+        if (request.LinkParameters.PaymentParameters.NotValidDateRange)
+            return new ApiMaxDateRangeBadRequestResponse();
+
         var paymentsWithMetaData = await _rep.Payments.GetAllPaymentsAsync(
             request.LinkParameters.PaymentParameters,
             request.TrackChanges

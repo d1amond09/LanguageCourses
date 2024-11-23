@@ -25,7 +25,7 @@ public class GetEmployeesHandler(IRepositoryManager rep, IMapper mapper, ICourse
             return new ApiMaxTuitionFeeRangeBadRequestResponse();
 
         if (request.LinkParameters.CourseParameters.NotValidHoursRange)
-            return new ApiMaxHoursRangeBadRequestResponse();
+            return new ApiMaxAgeRangeBadRequestResponse();
 
         var coursesWithMetaData = await _rep.Courses.GetAllCoursesAsync(
             request.LinkParameters.CourseParameters,

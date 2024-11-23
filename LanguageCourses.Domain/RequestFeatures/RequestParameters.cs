@@ -8,6 +8,12 @@ namespace LanguageCourses.Domain.RequestFeatures;
 
 public abstract class RequestParameters
 {
+    protected const double maxDoubleValue = 99999999.99;
+    protected const int minZeroValue = 0;
+    protected const int minYear = 1900;
+    protected const int minMonth = 1;
+    protected const int minDay = 1;
+
     const int maxPageSize = 50;
     private int _pageSize = 10;
 

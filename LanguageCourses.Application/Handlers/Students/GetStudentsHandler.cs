@@ -21,6 +21,12 @@ public class GetStudentsHandler(IRepositoryManager rep, IMapper mapper, IStudent
 
     public async Task<ApiBaseResponse> Handle(GetStudentsQuery request, CancellationToken cancellationToken)
     {
+        if (request.LinkParameters.StudentParameters.NotValidBirthDateRange)
+            return new ApiMaxDateRangeBadRequestResponse();
+
+        if (request.LinkParameters.StudentParameters.NotValidAgeRange)
+            return new ApiMaxAgeRangeBadRequestResponse();
+
         var coursesWithMetaData = await _rep.Students.GetAllStudentsAsync(
             request.LinkParameters.StudentParameters,
             request.TrackChanges
