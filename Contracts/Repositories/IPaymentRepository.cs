@@ -1,11 +1,13 @@
 ﻿using System.Linq.Expressions;
 using LanguageCourses.Domain.Entities;
+using LanguageCourses.Domain.RequestFeatures;
+using LanguageCourses.Domain.RequestFeatures.ModelParameters;
 
 namespace Contracts.Repositories;
 
 public interface IPaymentRepository
 {
-    Task<IEnumerable<Payment>> GetAllPaymentsAsync(bool trackChanges);
+    Task<PagedList<Payment>> GetAllPaymentsAsync(PaymentParameters paymentParameters, bool trackChanges);
     Task<IEnumerable<Payment>> GetByIdsAsync(IEnumerable<Guid> ids, bool trackChanges);
     Task<Payment?> GetPaymentAsync(Guid paymentId, bool trackChanges);
     public void CreatePayment(Payment payment);

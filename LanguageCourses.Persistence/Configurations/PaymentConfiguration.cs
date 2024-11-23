@@ -12,6 +12,10 @@ public class PaymentConfiguration : IEntityTypeConfiguration<Payment>
             .IsRequired()
             .HasColumnName("PaymentID");
 
+        builder.Property(e => e.Amount)
+            .IsRequired()
+            .HasColumnType("decimal(10, 2)");
+
         builder.HasData
         (
             new Payment
@@ -19,7 +23,7 @@ public class PaymentConfiguration : IEntityTypeConfiguration<Payment>
                 Id = new Guid("c9d4c053-49b6-410c-bc78-111111111111"),
                 Amount = 1200,
                 Date = DateOnly.FromDateTime(DateTime.Now),
-                Purpose = "Оплата обучения",
+                Purpose = "Академическая задолженность",
                 StudentId = new Guid("c9d4c053-49b6-410c-bc78-2d54a1111871"),
             }
         );

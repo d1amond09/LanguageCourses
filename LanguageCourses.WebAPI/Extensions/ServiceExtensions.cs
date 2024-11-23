@@ -125,6 +125,7 @@ public static class ServiceExtensions
     {
         services.AddScoped<ICourseLinks, CourseLinks>();
         services.AddScoped<IStudentLinks, StudentLinks>();
+        services.AddScoped<IPaymentLinks, PaymentLinks>();
         services.AddScoped<IEmployeeLinks, EmployeeLinks>();
         services.AddScoped<ValidateMediaTypeAttribute>();
     }
