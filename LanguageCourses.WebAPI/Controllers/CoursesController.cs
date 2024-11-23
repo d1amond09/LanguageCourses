@@ -27,7 +27,7 @@ public class CoursesController(ISender sender) : ApiControllerBase
     [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
     public async Task<IActionResult> GetCourses([FromQuery] CourseParameters courseParameters)
     {
-        var linkParams = new LinkParameters(courseParameters, HttpContext);
+        var linkParams = new LinkCourseParameters(courseParameters, HttpContext);
         var baseResult = await _sender.Send(new GetCoursesQuery(linkParams, TrackChanges: false));
         if (!baseResult.Success)
             return ProcessError(baseResult);

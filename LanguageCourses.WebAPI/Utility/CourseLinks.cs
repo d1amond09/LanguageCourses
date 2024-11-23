@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Contracts.ModelLinks;
 using LanguageCourses.Domain.DataTransferObjects;
 using LanguageCourses.Domain.LinkModels;
 using LanguageCourses.Domain.Models;

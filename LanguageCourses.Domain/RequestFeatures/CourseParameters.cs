@@ -10,7 +10,7 @@ public class CourseParameters : RequestParameters
 {
     public double MinTuitionFee { get; set; } = 0;
     public double MaxTuitionFee { get; set; } = 999999;
-    public bool NotValidPriceRange => MaxTuitionFee <= MinTuitionFee;
+    public bool NotValidTuitionFeeRange => MaxTuitionFee <= MinTuitionFee;
     public string SearchTerm { get; set; } = string.Empty;
     public CourseParameters()
     {

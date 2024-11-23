@@ -1,11 +1,12 @@
 ﻿using System.Linq.Expressions;
 using LanguageCourses.Domain.Entities;
+using LanguageCourses.Domain.RequestFeatures;
 
 namespace Contracts.Repositories;
 
 public interface IEmployeeRepository
 {
-    Task<IEnumerable<Employee>> GetAllEmployeesAsync(bool trackChanges);
+    Task<PagedList<Employee>> GetAllEmployeesAsync(EmployeeParameters employeeParameters, bool trackChanges);
     Task<IEnumerable<Employee>> GetByIdsAsync(IEnumerable<Guid> ids, bool trackChanges);
     Task<Employee?> GetEmployeeAsync(Guid employeeId, bool trackChanges);
     public void CreateEmployee(Employee employee);

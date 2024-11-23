@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using LanguageCourses.Domain.DataTransferObjects;
 using LanguageCourses.Domain.Entities;
-using LanguageJobTitles.Domain.DataTransferObjects;
 
 namespace LanguageCourses.Application;
 

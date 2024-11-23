@@ -17,6 +17,7 @@ using LanguageCourses.Application.Behaviors;
 using Marvin.Cache.Headers;
 using FluentValidation;
 using LanguageCourses.WebAPI.GlobalException;
+using Contracts.ModelLinks;
 
 namespace LanguageCourses.WebAPI.Extensions;
 
@@ -111,12 +112,19 @@ public static class ServiceExtensions
         services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
     }
 
-    public static void ConfigureDataShaping(this IServiceCollection services) =>
+    public static void ConfigureDataShaping(this IServiceCollection services)
+    {
         services.AddScoped<IDataShaper<CourseDto>, DataShaper<CourseDto>>();
+        services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
+        services.AddScoped<IDataShaper<JobTitleDto>, DataShaper<JobTitleDto>>();
+        services.AddScoped<IDataShaper<PaymentDto>, DataShaper<PaymentDto>>();
+        services.AddScoped<IDataShaper<StudentDto>, DataShaper<StudentDto>>();
+    }
 
     public static void ConfigureHATEOAS(this IServiceCollection services)
     {
         services.AddScoped<ICourseLinks, CourseLinks>();
+        services.AddScoped<IEmployeeLinks, EmployeeLinks>();
         services.AddScoped<ValidateMediaTypeAttribute>();
     }
 

@@ -2,12 +2,12 @@
 using LanguageCourses.Domain.LinkModels;
 using Microsoft.AspNetCore.Http;
 
-namespace Contracts;
+namespace Contracts.ModelLinks;
 
 public interface ICourseLinks
 {
     LinkResponse TryGenerateLinks(
-        IEnumerable<CourseDto> employeesDto,
+        IEnumerable<CourseDto> coursesDto,
         string fields,
         HttpContext httpContext);
 

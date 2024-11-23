@@ -20,6 +20,28 @@ public class LanguageCoursesContext(DbContextOptions<LanguageCoursesContext> opt
     {
         base.OnModelCreating(modelBuilder);
 
+
         modelBuilder.ApplyConfiguration(new CourseConfiguration());
+        modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
+        modelBuilder.ApplyConfiguration(new StudentConfiguration());
+        modelBuilder.ApplyConfiguration(new PaymentConfiguration());
+        modelBuilder.ApplyConfiguration(new JobTitleConfiguration());
+
+        modelBuilder.Entity<Course>()
+        .HasMany(c => c.Students)
+        .WithMany(s => s.Courses)
+        .UsingEntity<Dictionary<string, object>>(
+            "CourseStudents", 
+            j => j
+                .HasOne<Student>()
+                .WithMany()
+                .HasForeignKey("StudentID"),
+            j => j
+                .HasOne<Course>()
+                .WithMany()
+                .HasForeignKey("CourseID"),
+            j => {
+                j.HasKey("CourseID", "StudentID"); 
+        });
     }
 }

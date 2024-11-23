@@ -16,7 +16,7 @@ internal class CourseRepository(LanguageCoursesContext appDbContext) :
     public async Task<PagedList<Course>> GetAllCoursesAsync(CourseParameters courseParameters, bool trackChanges = false)
     {
         var courses =
-            await FindAll(trackChanges)
+            await FindAll(trackChanges).Include(c => c.Students)
                 .FilterCourses(courseParameters.MinTuitionFee, courseParameters.MaxTuitionFee)
                 .Search(courseParameters.SearchTerm)
                 .Sort(courseParameters.OrderBy)

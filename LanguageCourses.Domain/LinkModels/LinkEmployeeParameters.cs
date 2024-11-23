@@ -3,4 +3,4 @@ using Microsoft.AspNetCore.Http;
 
 namespace LanguageCourses.Domain.LinkModels;
 
-public record LinkParameters(CourseParameters CourseParameters, HttpContext Context);
+public record LinkEmployeeParameters(EmployeeParameters EmployeeParameters, HttpContext Context);

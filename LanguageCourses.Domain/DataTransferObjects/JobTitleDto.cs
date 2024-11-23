@@ -1,4 +1,4 @@
-﻿namespace LanguageJobTitles.Domain.DataTransferObjects;
+﻿namespace LanguageCourses.Domain.DataTransferObjects;
 
 public record JobTitleDto
 {

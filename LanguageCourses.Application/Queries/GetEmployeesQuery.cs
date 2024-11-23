@@ -4,6 +4,6 @@ using MediatR;
 
 namespace LanguageCourses.Application.Queries;
 
-public sealed record GetCoursesQuery(LinkCourseParameters LinkParameters, bool TrackChanges) :
+public sealed record GetEmployeesQuery(LinkEmployeeParameters LinkParameters, bool TrackChanges) :
     IRequest<ApiBaseResponse>;
 
