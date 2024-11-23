@@ -17,7 +17,9 @@ internal class CourseRepository(LanguageCoursesContext appDbContext) :
     {
         var courses =
             await FindAll(trackChanges).Include(c => c.Students)
-                .FilterCourses(courseParameters.MinTuitionFee, courseParameters.MaxTuitionFee)
+                .FilterTuitionFeeCourses(courseParameters.MinTuitionFee, courseParameters.MaxTuitionFee)
+                .FilterHoursCourses(courseParameters.MinHours, courseParameters.MaxHours)
+                .SearchByTrainingProgram(courseParameters.SearchTrainingProgram)
                 .Search(courseParameters.SearchTerm)
                 .Sort(courseParameters.OrderBy)
                 .Skip((courseParameters.PageNumber - 1) * courseParameters.PageSize)
