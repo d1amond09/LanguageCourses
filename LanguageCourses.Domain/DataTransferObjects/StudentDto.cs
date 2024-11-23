@@ -11,6 +11,7 @@ public record StudentDto
     public string? Phone { get; init; }
     public string? PassportNumber { get; init; }
     public ICollection<PaymentDto>? Payments { get; init; }
+    public ICollection<CourseDto>? Courses { get; init; }
 }
 
 public record StudentForManipulationDto
@@ -21,6 +22,7 @@ public record StudentForManipulationDto
     public string? Phone { get; init; }
     public string? PassportNumber { get; init; }
     public ICollection<PaymentDto>? Payments { get; init; }
+    public ICollection<CourseDto>? Courses { get; init; }
 }
 
 public record StudentForUpdateDto : StudentForManipulationDto;

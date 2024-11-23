@@ -1,6 +1,7 @@
 ﻿using Contracts.Repositories;
 using LanguageCourses.Domain.Entities;
 using LanguageCourses.Domain.RequestFeatures;
+using LanguageCourses.Domain.RequestFeatures.ModelParameters;
 using LanguageCourses.Persistence.Extensions;
 using Microsoft.EntityFrameworkCore;
 

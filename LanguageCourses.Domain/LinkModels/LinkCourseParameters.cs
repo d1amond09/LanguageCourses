@@ -1,4 +1,4 @@
-﻿using LanguageCourses.Domain.RequestFeatures;
+﻿using LanguageCourses.Domain.RequestFeatures.ModelParameters;
 using Microsoft.AspNetCore.Http;
 
 namespace LanguageCourses.Domain.LinkModels;

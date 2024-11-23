@@ -7,6 +7,7 @@ using LanguageCourses.Domain.DataTransferObjects;
 using LanguageCourses.Domain.Exceptions;
 using LanguageCourses.Domain.LinkModels;
 using LanguageCourses.Domain.RequestFeatures;
+using LanguageCourses.Domain.RequestFeatures.ModelParameters;
 using LanguageCourses.WebAPI.ActionFilters;
 using LanguageCourses.WebAPI.Extensions;
 using MediatR;

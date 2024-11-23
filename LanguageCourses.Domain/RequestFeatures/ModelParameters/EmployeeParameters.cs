@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LanguageCourses.Domain.RequestFeatures;
+namespace LanguageCourses.Domain.RequestFeatures.ModelParameters;
 
 public class EmployeeParameters : RequestParameters
 {

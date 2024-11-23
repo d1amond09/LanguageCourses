@@ -1,4 +1,6 @@
-﻿namespace LanguageCourses.Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace LanguageCourses.Domain.Entities;
 
 public class Student
 {

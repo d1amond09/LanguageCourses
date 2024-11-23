@@ -1,6 +1,7 @@
 ﻿using Contracts.Repositories;
 using LanguageCourses.Domain.Entities;
 using LanguageCourses.Domain.RequestFeatures;
+using LanguageCourses.Domain.RequestFeatures.ModelParameters;
 using LanguageCourses.Persistence.Extensions;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,7 +17,7 @@ internal class CourseRepository(LanguageCoursesContext appDbContext) :
     public async Task<PagedList<Course>> GetAllCoursesAsync(CourseParameters courseParameters, bool trackChanges = false)
     {
         var courses =
-            await FindAll(trackChanges).Include(c => c.Students)
+            await FindAll(trackChanges)
                 .FilterTuitionFeeCourses(courseParameters.MinTuitionFee, courseParameters.MaxTuitionFee)
                 .FilterHoursCourses(courseParameters.MinHours, courseParameters.MaxHours)
                 .SearchByTrainingProgram(courseParameters.SearchTrainingProgram)

@@ -14,14 +14,14 @@ public sealed class UpdateEmployeeHandler(IRepositoryManager rep, IMapper mapper
 
     public async Task<ApiBaseResponse> Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
     {
-        var courseEntity = await _rep.Employees.GetEmployeeAsync(request.Id, request.TrackChanges);
+        var returnEntity = await _rep.Employees.GetEmployeeAsync(request.Id, request.TrackChanges);
 
-        if (courseEntity is null)
+        if (returnEntity is null)
             return new EmployeeNotFoundResponse(request.Id);
 
-        _mapper.Map(request.Employee, courseEntity);
+        _mapper.Map(request.Employee, returnEntity);
         await _rep.SaveAsync();
 
-        return new ApiOkResponse<Employee>(courseEntity);
+        return new ApiOkResponse<Employee>(returnEntity);
     }
 }

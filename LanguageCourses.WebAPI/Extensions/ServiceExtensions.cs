@@ -124,6 +124,7 @@ public static class ServiceExtensions
     public static void ConfigureHATEOAS(this IServiceCollection services)
     {
         services.AddScoped<ICourseLinks, CourseLinks>();
+        services.AddScoped<IStudentLinks, StudentLinks>();
         services.AddScoped<IEmployeeLinks, EmployeeLinks>();
         services.AddScoped<ValidateMediaTypeAttribute>();
     }

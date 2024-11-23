@@ -14,11 +14,11 @@ public class GetEmployeeHandler(IRepositoryManager rep, IMapper mapper) : IReque
 
     public async Task<ApiBaseResponse> Handle(GetEmployeeQuery request, CancellationToken cancellationToken)
     {
-        var course = await _rep.Employees.GetEmployeeAsync(request.EmployeeId, request.TrackChanges);
-        if (course is null)
+        var employee = await _rep.Employees.GetEmployeeAsync(request.EmployeeId, request.TrackChanges);
+        if (employee is null)
             return new EmployeeNotFoundResponse(request.EmployeeId);
 
-        var courseDto = _mapper.Map<EmployeeDto>(course);
-        return new ApiOkResponse<EmployeeDto>(courseDto);
+        var employeeDto = _mapper.Map<EmployeeDto>(employee);
+        return new ApiOkResponse<EmployeeDto>(employeeDto);
     }
 }

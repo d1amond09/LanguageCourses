@@ -12,14 +12,14 @@ public sealed class DeleteEmployeeHandler(IRepositoryManager rep) : IRequestHand
 
     public async Task<ApiBaseResponse> Handle(DeleteEmployeeCommand request, CancellationToken cancellationToken)
     {
-        var course = await _rep.Employees.GetEmployeeAsync(request.Id, request.TrackChanges);
+        var employee = await _rep.Employees.GetEmployeeAsync(request.Id, request.TrackChanges);
 
-        if (course is null)
+        if (employee is null)
             return new EmployeeNotFoundResponse(request.Id);
 
-        _rep.Employees.DeleteEmployee(course);
+        _rep.Employees.DeleteEmployee(employee);
         await _rep.SaveAsync();
 
-        return new ApiOkResponse<Employee>(course);
+        return new ApiOkResponse<Employee>(employee);
     }
 }

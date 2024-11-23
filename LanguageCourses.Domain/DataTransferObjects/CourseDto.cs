@@ -14,7 +14,6 @@ public record CourseDto
     public int AvailableSeats { get; init; }
     public int Hours { get; init; }
     public decimal TuitionFee { get; init; }
-    public ICollection<StudentDto>? Students { get; init; }
 }
 
 public record CourseForManipulationDto
@@ -28,7 +27,6 @@ public record CourseForManipulationDto
     public int AvailableSeats { get; init; }
     public int Hours { get; init; }
     public decimal TuitionFee { get; init; }
-    public ICollection<StudentDto>? Students { get; init; }
 }
 
 public record CourseForUpdateDto : CourseForManipulationDto;
