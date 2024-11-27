@@ -17,20 +17,25 @@ internal class CourseRepository(LanguageCoursesContext appDbContext) :
     public async Task<PagedList<Course>> GetAllCoursesAsync(CourseParameters courseParameters, bool trackChanges = false)
     {
         var courses =
-            await FindAll(trackChanges)
+             FindAll(trackChanges)
                 .FilterTuitionFeeCourses(courseParameters.MinTuitionFee, courseParameters.MaxTuitionFee)
                 .FilterHoursCourses(courseParameters.MinHours, courseParameters.MaxHours)
                 .SearchByTrainingProgram(courseParameters.SearchTrainingProgram)
                 .Search(courseParameters.SearchTerm)
-                .Sort(courseParameters.OrderBy)
+                .Sort(courseParameters.OrderBy);
+
+        var count = await courses.CountAsync();
+
+
+
+        var coursesToReturn = await courses
                 .Skip((courseParameters.PageNumber - 1) * courseParameters.PageSize)
                 .Take(courseParameters.PageSize)
                 .ToListAsync();
 
-        var count = await FindAll(trackChanges).CountAsync();
 
         return new PagedList<Course>(
-            courses,
+            coursesToReturn,
             count,
             courseParameters.PageNumber,
             courseParameters.PageSize

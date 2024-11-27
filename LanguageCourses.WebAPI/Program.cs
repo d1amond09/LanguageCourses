@@ -57,7 +57,7 @@ public class Program
         s.AddEndpointsApiExplorer();
         s.ConfigureSwagger();
 
-        //s.AddJwtAuthenticationConfiguration(config);
+        s.AddJwtAuthenticationConfiguration(config);
 
         s.ConfigureDataShaping();
         s.ConfigureHATEOAS();
@@ -95,7 +95,7 @@ public class Program
         });
         app.UseRouting();
 
-
+        app.UseAuthentication();
         app.UseAuthorization();
     }
 }

@@ -14,7 +14,7 @@ public abstract class RequestParameters
     protected const int minMonth = 1;
     protected const int minDay = 1;
 
-    const int maxPageSize = 50;
+    const int maxPageSize = 2000;
     private int _pageSize = 10;
 
     public int PageNumber { get; set; } = 1;

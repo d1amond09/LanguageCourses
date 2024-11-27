@@ -4,8 +4,8 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER app
 WORKDIR /app
-EXPOSE 8083
-EXPOSE 445
+EXPOSE 8080
+EXPOSE 8081
 
 
 # Этот этап используется для сборки проекта службы
@@ -13,11 +13,6 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["LanguageCourses.WebAPI/LanguageCourses.WebAPI.csproj", "LanguageCourses.WebAPI/"]
-COPY ["Contracts/Contracts.csproj", "Contracts/"]
-COPY ["LanguageCourses.Domain/LanguageCourses.Domain.csproj", "LanguageCourses.Domain/"]
-COPY ["LanguageCourses.Application/LanguageCourses.Application.csproj", "LanguageCourses.Application/"]
-COPY ["LanguageCourses.Persistence/LanguageCourses.Persistence.csproj", "LanguageCourses.Persistence/"]
-COPY ["LoggerService/LoggerService.csproj", "LoggerService/"]
 RUN dotnet restore "./LanguageCourses.WebAPI/LanguageCourses.WebAPI.csproj"
 COPY . .
 WORKDIR "/src/LanguageCourses.WebAPI"

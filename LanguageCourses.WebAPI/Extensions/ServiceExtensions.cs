@@ -18,6 +18,9 @@ using Marvin.Cache.Headers;
 using FluentValidation;
 using LanguageCourses.WebAPI.GlobalException;
 using Contracts.ModelLinks;
+using LanguageCourses.Domain.ConfigurationModels;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace LanguageCourses.WebAPI.Extensions;
 
@@ -27,7 +30,7 @@ public static class ServiceExtensions
         services.AddCors(options =>
         {
             options.AddPolicy("CorsPolicy", builder =>
-            builder.AllowAnyOrigin()
+            builder.WithOrigins("http://localhost:5173")
             .AllowAnyMethod()
             .AllowAnyHeader()
             .WithExposedHeaders("X-Pagination"));
@@ -39,7 +42,7 @@ public static class ServiceExtensions
     public static void ConfigureSqlContext(this IServiceCollection services,
         IConfiguration configuration) =>
         services.AddDbContext<LanguageCoursesContext>(opts =>
-            opts.UseSqlServer(configuration.GetConnectionString("local_MSSQLServerConnection"), b =>
+            opts.UseSqlServer(configuration.GetConnectionString("ASPMonster_MSSQLServerConnection"), b =>
             {
                 b.MigrationsAssembly("LanguageCourses.Persistence");
                 b.EnableRetryOnFailure();
@@ -137,13 +140,38 @@ public static class ServiceExtensions
     public static IMvcBuilder AddCustomCSVFormatter(this IMvcBuilder builder) =>
         builder.AddMvcOptions(config => config.OutputFormatters.Add(new CsvOutputFormatter()));
 
+    public static void AddJwtAuthenticationConfiguration(this IServiceCollection services, IConfiguration config)
+    {
+        services.Configure<JwtConfiguration>("JwtSettings", config.GetSection("JwtSettings"));
+        var jwtConfiguration = new JwtConfiguration();
+        config.Bind(jwtConfiguration.Section, jwtConfiguration);
+        var secretKey = config.GetValue<string>("SECRET");
+        ArgumentNullException.ThrowIfNull(secretKey);
+
+        services.AddAuthentication("Bearer").AddJwtBearer("Bearer", opt =>
+        {
+            opt.Authority = jwtConfiguration.ValidAudience;
+            opt.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+
+                ValidIssuer = jwtConfiguration.ValidIssuer,
+                ValidAudience = jwtConfiguration.ValidAudience,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
+            };
+        });
+    }
+
     public static void ConfigureSwagger(this IServiceCollection services)
     {
         services.AddSwaggerGen(s =>
         {
             s.SwaggerDoc("v1", new OpenApiInfo
             {
-                Title = "Product API",
+                Title = "LanguageCourses API",
                 Version = "v1"
             });
             s.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());

@@ -17,19 +17,22 @@ internal class EmployeeRepository(LanguageCoursesContext appDbContext) :
     public async Task<PagedList<Employee>> GetAllEmployeesAsync(EmployeeParameters employeeParameters, bool trackChanges = false)
     {
         var employees =
-            await FindAll(trackChanges).Include(e => e.Courses)
+                FindAll(trackChanges).Include(e => e.Courses)
                 .FilterByEducation(employeeParameters.Education)
                 .FilterByJobTitle(employeeParameters.JobTitle)
                 .Search(employeeParameters.SearchTerm)
-                .Sort(employeeParameters.OrderBy)
+                .Sort(employeeParameters.OrderBy);
+
+        var count = await employees.CountAsync();
+
+        var employeesToReturn = await employees
                 .Skip((employeeParameters.PageNumber - 1) * employeeParameters.PageSize)
                 .Take(employeeParameters.PageSize)
                 .ToListAsync();
 
-        var count = await FindAll(trackChanges).CountAsync();
 
         return new PagedList<Employee>(
-            employees,
+            employeesToReturn,
             count,
             employeeParameters.PageNumber,
             employeeParameters.PageSize

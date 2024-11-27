@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Cont
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LanguageCourses.WebAPI", "LanguageCourses.WebAPI\LanguageCourses.WebAPI.csproj", "{D4C32858-F469-41AF-A2C8-AB8316D2F6E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerService", "LoggerService\LoggerService.csproj", "{E4813293-71EC-422C-BA9D-45D443532510}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggerService", "LoggerService\LoggerService.csproj", "{E4813293-71EC-422C-BA9D-45D443532510}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{5721445B-3264-43C9-9270-14A7461F0A2C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{E4813293-71EC-422C-BA9D-45D443532510}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4813293-71EC-422C-BA9D-45D443532510}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4813293-71EC-422C-BA9D-45D443532510}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5721445B-3264-43C9-9270-14A7461F0A2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5721445B-3264-43C9-9270-14A7461F0A2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5721445B-3264-43C9-9270-14A7461F0A2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5721445B-3264-43C9-9270-14A7461F0A2C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

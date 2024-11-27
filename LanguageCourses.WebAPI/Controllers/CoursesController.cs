@@ -20,6 +20,7 @@ namespace LanguageCourses.WebAPI.Controllers;
 [Consumes("application/json")]
 [Route("api/courses")]
 [ApiController]
+[Authorize]
 public class CoursesController(ISender sender) : ApiControllerBase
 {
     private readonly ISender _sender = sender;
