@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using LanguageCourses.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using LanguageCourses.Domain.Entities;
 
 namespace LanguageCourses.Persistence.Configurations;
 
@@ -14,22 +14,22 @@ public class CourseConfiguration : IEntityTypeConfiguration<Course>
 
         builder.Property(e => e.EmployeeId)
             .IsRequired()
-            .HasColumnName("EmployeeID"); 
+            .HasColumnName("EmployeeID");
 
         builder.Property(e => e.Name)
             .IsRequired()
-            .HasMaxLength(255); 
+            .HasMaxLength(255);
 
         builder.Property(e => e.TrainingProgram)
             .IsRequired()
-            .HasMaxLength(255); 
+            .HasMaxLength(255);
 
         builder.Property(e => e.Description)
-            .HasMaxLength(255); 
+            .HasMaxLength(255);
 
         builder.Property(e => e.Intensity)
             .IsRequired()
-            .HasMaxLength(255); 
+            .HasMaxLength(255);
 
         builder.Property(e => e.GroupSize)
             .IsRequired();

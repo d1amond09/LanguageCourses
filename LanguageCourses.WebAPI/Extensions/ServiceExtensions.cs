@@ -1,26 +1,26 @@
-﻿using Contracts;
+﻿using System.Text;
+using AspNetCoreRateLimit;
+using Contracts;
+using Contracts.ModelLinks;
+using FluentValidation;
 using Inno_Shop.Services.ProductAPI.Core.Application.Service;
 using LanguageCourses.Application;
-using LanguageCourses.Persistence;
-using LanguageCourses.WebAPI.Formatters.Output;
-using LoggerService;
-using MediatR;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
-using AspNetCoreRateLimit;
-using LanguageCourses.Domain.DataTransferObjects;
-using LanguageCourses.WebAPI.Utility;
-using LanguageCourses.WebAPI.ActionFilters;
 using LanguageCourses.Application.Behaviors;
-using Marvin.Cache.Headers;
-using FluentValidation;
-using LanguageCourses.WebAPI.GlobalException;
-using Contracts.ModelLinks;
 using LanguageCourses.Domain.ConfigurationModels;
+using LanguageCourses.Domain.DataTransferObjects;
+using LanguageCourses.Persistence;
+using LanguageCourses.WebAPI.ActionFilters;
+using LanguageCourses.WebAPI.Formatters.Output;
+using LanguageCourses.WebAPI.GlobalException;
+using LanguageCourses.WebAPI.Utility;
+using LoggerService;
+using Marvin.Cache.Headers;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
+using Microsoft.OpenApi.Models;
 
 namespace LanguageCourses.WebAPI.Extensions;
 
@@ -71,11 +71,13 @@ public static class ServiceExtensions
 
     public static void ConfigureHttpCacheHeaders(this IServiceCollection services) =>
         services.AddHttpCacheHeaders(
-            (expirationOpt) => {
+            (expirationOpt) =>
+            {
                 expirationOpt.MaxAge = 120;
                 expirationOpt.CacheLocation = CacheLocation.Private;
             },
-            (validationOpt) => {
+            (validationOpt) =>
+            {
                 validationOpt.MustRevalidate = true;
             }
         );
@@ -105,7 +107,8 @@ public static class ServiceExtensions
             }
         ];
 
-        services.Configure<IpRateLimitOptions>(opt => {
+        services.Configure<IpRateLimitOptions>(opt =>
+        {
             opt.GeneralRules = rateLimitRules;
         });
 

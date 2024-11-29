@@ -1,16 +1,14 @@
-﻿using Contracts;
+﻿using System.Text.Json;
 using LanguageCourses.Application.Commands;
 using LanguageCourses.Application.Queries;
 using LanguageCourses.Domain.DataTransferObjects;
-using LanguageCourses.Domain.Exceptions;
 using LanguageCourses.Domain.LinkModels;
-using LanguageCourses.Domain.RequestFeatures.ModelParameters;
 using LanguageCourses.Domain.RequestFeatures;
+using LanguageCourses.Domain.RequestFeatures.ModelParameters;
 using LanguageCourses.WebAPI.ActionFilters;
+using LanguageCourses.WebAPI.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
-using LanguageCourses.WebAPI.Extensions;
 
 namespace LanguageCourses.WebAPI.Controllers;
 

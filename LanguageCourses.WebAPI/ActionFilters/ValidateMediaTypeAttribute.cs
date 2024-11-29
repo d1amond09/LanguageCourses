@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Mvc;
-using System.Reflection.PortableExecutable;
-using System.Reflection;
 using Microsoft.Net.Http.Headers;
 
 namespace LanguageCourses.WebAPI.ActionFilters;

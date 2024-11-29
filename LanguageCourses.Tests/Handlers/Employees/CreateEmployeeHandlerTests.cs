@@ -6,10 +6,6 @@ using LanguageCourses.Domain.DataTransferObjects;
 using LanguageCourses.Domain.Entities;
 using LanguageCourses.Domain.Responses;
 using Moq;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace LanguageCourses.Tests.Handlers.Employees;
 
@@ -30,9 +26,9 @@ public class CreateJobTitleHandlerTests
     public async Task Handle_ValidRequest_CreatesEmployeeAndReturnsResponse()
     {
         // Arrange
-        var employeeToCreate = new EmployeeForCreationDto {  };
-        var employeeDto = new EmployeeDto {  };
-        var employeeEntity = new Employee {  };
+        var employeeToCreate = new EmployeeForCreationDto { };
+        var employeeDto = new EmployeeDto { };
+        var employeeEntity = new Employee { };
         var expectedResponse = new ApiOkResponse<EmployeeDto>(employeeDto);
 
         var command = new CreateEmployeeCommand(employeeToCreate);
@@ -56,7 +52,7 @@ public class CreateJobTitleHandlerTests
     public async Task Handle_SaveAsyncFails_ReturnsErrorResponse()
     {
         // Arrange
-        var employeeToCreate = new EmployeeForCreationDto {  };
+        var employeeToCreate = new EmployeeForCreationDto { };
         var employeeEntity = new Employee { };
 
         var command = new CreateEmployeeCommand(employeeToCreate);

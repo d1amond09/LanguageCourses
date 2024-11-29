@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using LanguageCourses.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using LanguageCourses.Domain.Entities;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace LanguageCourses.Persistence.Configurations;
 

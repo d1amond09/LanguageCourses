@@ -1,8 +1,6 @@
-﻿using System.Reflection;
-using System.Text;
-using System.Linq.Dynamic.Core;
-using LanguageCourses.Persistence.Extensions.Utility;
+﻿using System.Linq.Dynamic.Core;
 using LanguageCourses.Domain.Entities;
+using LanguageCourses.Persistence.Extensions.Utility;
 using Microsoft.IdentityModel.Tokens;
 
 namespace LanguageCourses.Persistence.Extensions;
@@ -11,10 +9,10 @@ public static class RepositoryEmployeeExtensions
 {
     public static IQueryable<Employee> FilterByEducation(this IQueryable<Employee> courses, string education)
     {
-        if(education.IsNullOrEmpty())
+        if (education.IsNullOrEmpty())
             return courses;
         else
-         return courses.Where(e => e.Education == education);
+            return courses.Where(e => e.Education == education);
 
     }
 

@@ -10,8 +10,8 @@ public class Employee
     public DateOnly BirthDate { get; set; }
     public string? Address { get; set; }
     public string? Phone { get; set; }
-    public string? PassportNumber { get; set; } 
-    public string? Education { get; set; } 
+    public string? PassportNumber { get; set; }
+    public string? Education { get; set; }
     public virtual ICollection<Course> Courses { get; set; } = [];
     public virtual JobTitle? JobTitle { get; set; }
 }

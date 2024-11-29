@@ -1,8 +1,6 @@
 ﻿using System.Net;
-using System.Text.Json;
 using LanguageCourses.Domain.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
 
 namespace LanguageCourses.WebAPI.GlobalException;
 

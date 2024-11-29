@@ -6,10 +6,6 @@ using LanguageCourses.Domain.DataTransferObjects;
 using LanguageCourses.Domain.Entities;
 using LanguageCourses.Domain.Responses;
 using Moq;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace LanguageCourses.Tests.Handlers.JobTitles
 {
@@ -30,8 +26,8 @@ namespace LanguageCourses.Tests.Handlers.JobTitles
         public async Task Handle_ValidRequest_CreatesJobTitleAndReturnsResponse()
         {
             // Arrange
-            var jobTitleToCreate = new JobTitleForCreationDto {  };
-            var jobTitleDto = new JobTitleDto {  };
+            var jobTitleToCreate = new JobTitleForCreationDto { };
+            var jobTitleDto = new JobTitleDto { };
             var jobTitleEntity = new JobTitle { };
             var expectedResponse = new ApiOkResponse<JobTitleDto>(jobTitleDto);
 
@@ -57,7 +53,7 @@ namespace LanguageCourses.Tests.Handlers.JobTitles
         {
             // Arrange
             var jobTitleToCreate = new JobTitleForCreationDto { };
-            var jobTitleEntity = new JobTitle {  };
+            var jobTitleEntity = new JobTitle { };
 
             var command = new CreateJobTitleCommand(jobTitleToCreate);
 

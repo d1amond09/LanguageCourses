@@ -27,11 +27,11 @@ public class CreateCourseHandlerTests
     {
         // Arrange
         var courseToCreate = new CourseForCreationDto { };
-        var courseDto = new CourseDto {  };
-        var courseEntity = new Course {  };
+        var courseDto = new CourseDto { };
+        var courseEntity = new Course { };
         var expectedResponse = new ApiOkResponse<CourseDto>(courseDto);
 
-        var command = new CreateCourseCommand( courseToCreate );
+        var command = new CreateCourseCommand(courseToCreate);
 
         _mockMapper.Setup(m => m.Map<Course>(courseToCreate)).Returns(courseEntity);
         _mockRepo.Setup(r => r.Courses.CreateCourse(courseEntity));
@@ -52,11 +52,11 @@ public class CreateCourseHandlerTests
     public async Task Handle_SaveAsyncFails_ReturnsErrorResponse()
     {
         // Arrange
-        var courseToCreate = new CourseForCreationDto {  };
+        var courseToCreate = new CourseForCreationDto { };
         var courseDto = new CourseDto { };
         var courseEntity = new Course { };
 
-        var command = new CreateCourseCommand (courseToCreate);
+        var command = new CreateCourseCommand(courseToCreate);
 
         _mockMapper.Setup(m => m.Map<Course>(courseToCreate)).Returns(courseEntity);
         _mockRepo.Setup(r => r.Courses.CreateCourse(courseEntity));

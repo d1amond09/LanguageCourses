@@ -6,10 +6,6 @@ using LanguageCourses.Domain.DataTransferObjects;
 using LanguageCourses.Domain.Entities;
 using LanguageCourses.Domain.Responses;
 using Moq;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace LanguageCourses.Tests.Handlers.JobTitles
 {
@@ -31,12 +27,12 @@ namespace LanguageCourses.Tests.Handlers.JobTitles
         {
             // Arrange
             var jobTitleId = Guid.NewGuid();
-            var existingJobTitle = new JobTitle { Id = jobTitleId }; 
-            var updatedJobTitleDto = new JobTitleForUpdateDto {  };
+            var existingJobTitle = new JobTitle { Id = jobTitleId };
+            var updatedJobTitleDto = new JobTitleForUpdateDto { };
             var command = new UpdateJobTitleCommand(jobTitleId, updatedJobTitleDto, false);
 
             _mockRepo.Setup(r => r.JobTitles.GetJobTitleAsync(jobTitleId, false)).ReturnsAsync(existingJobTitle);
-            _mockMapper.Setup(m => m.Map(updatedJobTitleDto, existingJobTitle)); 
+            _mockMapper.Setup(m => m.Map(updatedJobTitleDto, existingJobTitle));
 
             // Act
             var result = await _handler.Handle(command, CancellationToken.None);
@@ -55,7 +51,7 @@ namespace LanguageCourses.Tests.Handlers.JobTitles
         {
             // Arrange
             var jobTitleId = Guid.NewGuid();
-            var updatedJobTitleDto = new JobTitleForUpdateDto {  };
+            var updatedJobTitleDto = new JobTitleForUpdateDto { };
             var command = new UpdateJobTitleCommand(jobTitleId, updatedJobTitleDto, false);
 
             _mockRepo.Setup(r => r.JobTitles.GetJobTitleAsync(jobTitleId, false)).ReturnsAsync((JobTitle)null);

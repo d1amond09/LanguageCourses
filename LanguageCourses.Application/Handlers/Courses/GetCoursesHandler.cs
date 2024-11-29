@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.Design;
-using System.Dynamic;
-using AutoMapper;
+﻿using AutoMapper;
 using Contracts;
 using Contracts.ModelLinks;
 using LanguageCourses.Application.Queries;

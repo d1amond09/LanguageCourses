@@ -3,7 +3,6 @@ using Contracts;
 using LanguageCourses.WebAPI.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
 using NLog;
 
 namespace LanguageCourses.WebAPI;

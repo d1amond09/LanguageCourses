@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 using LanguageCourses.Domain.Entities;
-using LanguageCourses.Domain.RequestFeatures.ModelParameters;
 using LanguageCourses.Domain.RequestFeatures;
+using LanguageCourses.Domain.RequestFeatures.ModelParameters;
 
 namespace Contracts.Repositories;
 

@@ -6,10 +6,6 @@ using LanguageCourses.Domain.DataTransferObjects;
 using LanguageCourses.Domain.Entities;
 using LanguageCourses.Domain.Responses;
 using Moq;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace LanguageCourses.Tests.Handlers.Employees
 {
@@ -32,11 +28,11 @@ namespace LanguageCourses.Tests.Handlers.Employees
             // Arrange
             var employeeId = Guid.NewGuid();
             var existingEmployee = new Employee { Id = employeeId };
-            var updatedEmployeeDto = new EmployeeForUpdateDto {  };
+            var updatedEmployeeDto = new EmployeeForUpdateDto { };
             var command = new UpdateEmployeeCommand(employeeId, updatedEmployeeDto, false);
 
             _mockRepo.Setup(r => r.Employees.GetEmployeeAsync(employeeId, false)).ReturnsAsync(existingEmployee);
-            _mockMapper.Setup(m => m.Map(updatedEmployeeDto, existingEmployee)); 
+            _mockMapper.Setup(m => m.Map(updatedEmployeeDto, existingEmployee));
 
             // Act
             var result = await _handler.Handle(command, CancellationToken.None);
@@ -55,7 +51,7 @@ namespace LanguageCourses.Tests.Handlers.Employees
         {
             // Arrange
             var employeeId = Guid.NewGuid();
-            var updatedEmployeeDto = new EmployeeForUpdateDto {  };
+            var updatedEmployeeDto = new EmployeeForUpdateDto { };
             var command = new UpdateEmployeeCommand(employeeId, updatedEmployeeDto, false);
 
             _mockRepo.Setup(r => r.Employees.GetEmployeeAsync(employeeId, false)).ReturnsAsync((Employee)null);

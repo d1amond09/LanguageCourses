@@ -31,7 +31,7 @@ public class LanguageCoursesContext(DbContextOptions<LanguageCoursesContext> opt
         .HasMany(c => c.Students)
         .WithMany(s => s.Courses)
         .UsingEntity<Dictionary<string, object>>(
-            "CourseStudents", 
+            "CourseStudents",
             j => j
                 .HasOne<Student>()
                 .WithMany()
@@ -40,8 +40,9 @@ public class LanguageCoursesContext(DbContextOptions<LanguageCoursesContext> opt
                 .HasOne<Course>()
                 .WithMany()
                 .HasForeignKey("CourseID"),
-            j => {
-                j.HasKey("CourseID", "StudentID"); 
-        });
+            j =>
+            {
+                j.HasKey("CourseID", "StudentID");
+            });
     }
 }

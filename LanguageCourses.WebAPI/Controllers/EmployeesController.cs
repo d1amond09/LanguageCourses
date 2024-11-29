@@ -1,9 +1,7 @@
 ﻿using System.Text.Json;
-using Contracts;
 using LanguageCourses.Application.Commands;
 using LanguageCourses.Application.Queries;
 using LanguageCourses.Domain.DataTransferObjects;
-using LanguageCourses.Domain.Exceptions;
 using LanguageCourses.Domain.LinkModels;
 using LanguageCourses.Domain.RequestFeatures;
 using LanguageCourses.Domain.RequestFeatures.ModelParameters;

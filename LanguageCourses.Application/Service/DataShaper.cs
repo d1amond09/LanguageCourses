@@ -1,5 +1,4 @@
-﻿using System.Dynamic;
-using System.Reflection;
+﻿using System.Reflection;
 using Contracts;
 using LanguageCourses.Domain.Models;
 
@@ -77,7 +76,7 @@ public class DataShaper<T> : IDataShaper<T> where T : class
             shapedObject.Entity!.TryAdd(property.Name, objectPropertyValue);
         }
         var objectProperty = entity.GetType().GetProperty("Id");
-        shapedObject.Id = (Guid) objectProperty?.GetValue(entity)!;
+        shapedObject.Id = (Guid)objectProperty?.GetValue(entity)!;
         return shapedObject;
     }
 }

@@ -6,10 +6,6 @@ using LanguageCourses.Domain.DataTransferObjects;
 using LanguageCourses.Domain.Entities;
 using LanguageCourses.Domain.Responses;
 using Moq;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace LanguageCourses.Tests.Handlers.Courses
 {
@@ -31,12 +27,12 @@ namespace LanguageCourses.Tests.Handlers.Courses
         {
             // Arrange
             var courseId = Guid.NewGuid();
-            var existingCourse = new Course { Id = courseId }; 
-            var updatedCourseDto = new CourseForUpdateDto {  };
+            var existingCourse = new Course { Id = courseId };
+            var updatedCourseDto = new CourseForUpdateDto { };
             var command = new UpdateCourseCommand(courseId, updatedCourseDto, false);
 
             _mockRepo.Setup(r => r.Courses.GetCourseAsync(courseId, false)).ReturnsAsync(existingCourse);
-            _mockMapper.Setup(m => m.Map(updatedCourseDto, existingCourse)); 
+            _mockMapper.Setup(m => m.Map(updatedCourseDto, existingCourse));
 
             // Act
             var result = await _handler.Handle(command, CancellationToken.None);
@@ -55,7 +51,7 @@ namespace LanguageCourses.Tests.Handlers.Courses
         {
             // Arrange
             var courseId = Guid.NewGuid();
-            var updatedCourseDto = new CourseForUpdateDto {  };
+            var updatedCourseDto = new CourseForUpdateDto { };
             var command = new UpdateCourseCommand(courseId, updatedCourseDto, false);
 
             _mockRepo.Setup(r => r.Courses.GetCourseAsync(courseId, false)).ReturnsAsync((Course)null);
@@ -78,7 +74,7 @@ namespace LanguageCourses.Tests.Handlers.Courses
             // Arrange
             var courseId = Guid.NewGuid();
             var existingCourse = new Course { Id = courseId };
-            var updatedCourseDto = new CourseForUpdateDto {  };
+            var updatedCourseDto = new CourseForUpdateDto { };
             var command = new UpdateCourseCommand(courseId, updatedCourseDto, false);
 
             _mockRepo.Setup(r => r.Courses.GetCourseAsync(courseId, false)).ReturnsAsync(existingCourse);

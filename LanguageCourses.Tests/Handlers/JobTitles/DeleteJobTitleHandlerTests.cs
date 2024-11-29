@@ -4,10 +4,6 @@ using LanguageCourses.Application.Handlers.JobTitles;
 using LanguageCourses.Domain.Entities;
 using LanguageCourses.Domain.Responses;
 using Moq;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace LanguageCourses.Tests.Handlers.JobTitles
 {

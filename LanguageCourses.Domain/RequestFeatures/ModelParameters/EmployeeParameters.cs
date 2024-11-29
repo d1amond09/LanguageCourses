@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LanguageCourses.Domain.RequestFeatures.ModelParameters;
+﻿namespace LanguageCourses.Domain.RequestFeatures.ModelParameters;
 
 public class EmployeeParameters : RequestParameters
 {

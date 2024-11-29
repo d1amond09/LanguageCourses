@@ -7,5 +7,5 @@ public class Payment
     public string? Purpose { get; set; }
     public double Amount { get; set; }
     public Guid StudentId { get; set; }
-    public virtual Student? Student { get; set; } 
+    public virtual Student? Student { get; set; }
 }

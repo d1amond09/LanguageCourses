@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using Contracts;
-using Contracts.Repositories;
+﻿using Contracts;
 using LanguageCourses.Application.Commands;
 using LanguageCourses.Domain.Entities;
 using LanguageCourses.Domain.Responses;

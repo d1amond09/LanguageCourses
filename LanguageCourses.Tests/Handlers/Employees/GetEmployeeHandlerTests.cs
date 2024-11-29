@@ -1,15 +1,11 @@
 using AutoMapper;
 using Contracts;
-using LanguageCourses.Application.Queries;
 using LanguageCourses.Application.Handlers.Employees;
+using LanguageCourses.Application.Queries;
 using LanguageCourses.Domain.DataTransferObjects;
 using LanguageCourses.Domain.Entities;
 using LanguageCourses.Domain.Responses;
 using Moq;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace LanguageCourses.Tests.Handlers.Employees
 {

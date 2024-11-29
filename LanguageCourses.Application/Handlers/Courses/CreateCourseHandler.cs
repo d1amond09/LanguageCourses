@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Contracts;
 using LanguageCourses.Application.Commands;
-using LanguageCourses.Domain.Responses;
-using LanguageCourses.Domain.Entities;
 using LanguageCourses.Domain.DataTransferObjects;
+using LanguageCourses.Domain.Entities;
+using LanguageCourses.Domain.Responses;
 using MediatR;
 
 namespace LanguageCourses.Application.Handlers.Courses;

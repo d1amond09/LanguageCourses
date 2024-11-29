@@ -1,6 +1,4 @@
-﻿using LanguageCourses.Domain.Entities;
-
-namespace LanguageCourses.Domain.DataTransferObjects;
+﻿namespace LanguageCourses.Domain.DataTransferObjects;
 
 public record JobTitleDto
 {
