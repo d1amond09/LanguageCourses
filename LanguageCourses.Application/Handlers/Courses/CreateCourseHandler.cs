@@ -8,7 +8,7 @@ using MediatR;
 
 namespace LanguageCourses.Application.Handlers.Courses;
 
-public sealed class CreateEmployeeHandler(IRepositoryManager rep, IMapper mapper) : IRequestHandler<CreateCourseCommand, ApiBaseResponse>
+public sealed class CreateCourseHandler(IRepositoryManager rep, IMapper mapper) : IRequestHandler<CreateCourseCommand, ApiBaseResponse>
 {
     private readonly IRepositoryManager _rep = rep;
     private readonly IMapper _mapper = mapper;

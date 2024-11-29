@@ -12,7 +12,7 @@ using MediatR;
 
 namespace LanguageCourses.Application.Handlers.Courses;
 
-public class GetEmployeesHandler(IRepositoryManager rep, IMapper mapper, ICourseLinks courseLinks) :
+public class GetCoursesHandler(IRepositoryManager rep, IMapper mapper, ICourseLinks courseLinks) :
     IRequestHandler<GetCoursesQuery, ApiBaseResponse>
 {
     private readonly IRepositoryManager _rep = rep;

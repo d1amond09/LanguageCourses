@@ -100,7 +100,7 @@ public static class ServiceExtensions
         List<RateLimitRule> rateLimitRules = [
             new() {
                 Endpoint = "*",
-                Limit = 10,
+                Limit = 100,
                 Period = "1s"
             }
         ];

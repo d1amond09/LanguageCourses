@@ -8,7 +8,7 @@ using MediatR;
 
 namespace LanguageCourses.Application.Handlers.Courses;
 
-public sealed class DeleteEmployeeHandler(IRepositoryManager rep) : IRequestHandler<DeleteCourseCommand, ApiBaseResponse>
+public sealed class DeleteCourseHandler(IRepositoryManager rep) : IRequestHandler<DeleteCourseCommand, ApiBaseResponse>
 {
     private readonly IRepositoryManager _rep = rep;
 
