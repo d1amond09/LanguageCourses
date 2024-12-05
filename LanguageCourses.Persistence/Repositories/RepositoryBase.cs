@@ -6,17 +6,18 @@ namespace LanguageCourses.Persistence.Repositories;
 
 internal abstract class RepositoryBase<T>(LanguageCoursesContext appDbContext) : IRepositoryBase<T> where T : class
 {
-    protected LanguageCoursesContext AppDbContext = appDbContext;
+    protected LanguageCoursesContext _appDbContext = appDbContext;
 
     public IQueryable<T> FindAll(bool trackChanges = false) =>
-        !trackChanges ? AppDbContext.Set<T>()
-        .AsNoTracking() : AppDbContext.Set<T>();
+        !trackChanges ? _appDbContext.Set<T>()
+        .AsNoTracking() : _appDbContext.Set<T>();
 
     public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges = false) =>
-        !trackChanges ? AppDbContext.Set<T>().Where(expression)
-        .AsNoTracking() : AppDbContext.Set<T>().Where(expression);
+        !trackChanges ? _appDbContext.Set<T>().Where(expression)
+        .AsNoTracking() : _appDbContext.Set<T>().Where(expression);
 
-    public void Create(T entity) => AppDbContext.Set<T>().Add(entity);
-    public void Update(T entity) => AppDbContext.Set<T>().Update(entity);
-    public void Delete(T entity) => AppDbContext.Set<T>().Remove(entity);
+    public void Attach(T entity) => _appDbContext.Set<T>().Attach(entity);
+    public void Create(T entity) => _appDbContext.Set<T>().Add(entity);
+    public void Update(T entity) => _appDbContext.Set<T>().Update(entity);
+    public void Delete(T entity) => _appDbContext.Set<T>().Remove(entity);
 }

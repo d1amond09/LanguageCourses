@@ -21,20 +21,22 @@ internal class PaymentRepository(LanguageCoursesContext appDbContext) :
 
     public async Task<PagedList<Payment>> GetAllPaymentsAsync(PaymentParameters paymentParameters, bool trackChanges = false)
     {
-        var payments =
-            await FindAll(trackChanges)
+        var payments = FindAll(trackChanges)
                 .FilterAmountPayments(paymentParameters.MinAmount, paymentParameters.MaxAmount)
                 .FilterDatePayments(paymentParameters.MinDate, paymentParameters.MaxDate)
                 .Search(paymentParameters.SearchTerm)
-                .Sort(paymentParameters.OrderBy)
+                .Sort(paymentParameters.OrderBy);
+
+        var count = await payments.CountAsync();
+
+        var paymentsToReturn = await payments
                 .Skip((paymentParameters.PageNumber - 1) * paymentParameters.PageSize)
                 .Take(paymentParameters.PageSize)
                 .ToListAsync();
 
-        var count = await FindAll(trackChanges).CountAsync();
 
         return new PagedList<Payment>(
-            payments,
+            paymentsToReturn,
             count,
             paymentParameters.PageNumber,
             paymentParameters.PageSize

@@ -53,6 +53,7 @@ public class CoursesController(ISender sender) : ApiControllerBase
     }
 
     [HttpPost(Name = "CreateCourse")]
+    [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> CreateCourse([FromBody] CourseForCreationDto course)
     {
         var baseResult = await _sender.Send(new CreateCourseCommand(course));
@@ -66,6 +67,7 @@ public class CoursesController(ISender sender) : ApiControllerBase
     }
 
     [HttpDelete("{id:guid}")]
+    [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> DeleteCourse(Guid id)
     {
         var baseResult = await _sender.Send(new DeleteCourseCommand(id, TrackChanges: false));
@@ -77,6 +79,7 @@ public class CoursesController(ISender sender) : ApiControllerBase
     }
 
     [HttpPut("{id:guid}")]
+    [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> UpdateCourse(Guid id, [FromBody] CourseForUpdateDto course)
     {
         var baseResult = await _sender.Send(new UpdateCourseCommand(id, course, TrackChanges: true));

@@ -13,7 +13,8 @@ public class MappingProfile : Profile
                 .MapFrom(s => string.Join(' ', s.Surname, s.Name, s.MidName)
             )
         );
-        CreateMap<StudentForCreationDto, Student>();
+        CreateMap<StudentForCreationDto, Student>()
+            .ForMember(dest => dest.Courses, opt => opt.Ignore());
         CreateMap<StudentForUpdateDto, Student>();
 
         CreateMap<Course, CourseDto>();

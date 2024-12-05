@@ -11,6 +11,7 @@ public interface ICourseRepository
     Task<IEnumerable<Course>> GetByIdsAsync(IEnumerable<Guid> ids, bool trackChanges);
     Task<Course?> GetCourseAsync(Guid courseId, bool trackChanges);
     public void CreateCourse(Course course);
+    public void Attach(Course course);
     public void DeleteCourse(Course course);
     IQueryable<Course> FindByCondition(Expression<Func<Course, bool>> expression, bool trackChanges = false);
 

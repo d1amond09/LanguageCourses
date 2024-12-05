@@ -42,10 +42,10 @@ internal class CourseRepository(LanguageCoursesContext appDbContext) :
         );
     }
     public async Task<Course?> GetCourseAsync(Guid courseId, bool trackChanges = false) =>
-        await FindByCondition(c => c.Id.Equals(courseId), trackChanges)
+        await FindByCondition(c => c.Id.Equals(courseId), trackChanges).Include(x => x.Students)
             .SingleOrDefaultAsync();
 
     public async Task<IEnumerable<Course>> GetByIdsAsync(IEnumerable<Guid> ids, bool trackChanges = false) =>
-        await FindByCondition(x => ids.Contains(x.Id), trackChanges)
+        await FindByCondition(x => ids.Contains(x.Id), trackChanges).Include(x => x.Students)
             .ToListAsync();
 }

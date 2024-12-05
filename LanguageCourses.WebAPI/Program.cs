@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using AspNetCoreRateLimit;
 using Contracts;
 using LanguageCourses.WebAPI.Extensions;
@@ -23,7 +24,7 @@ public class Program
             app.UseSwagger();
             app.UseSwaggerUI(s =>
             {
-                s.SwaggerEndpoint("./v1/swagger.json", "Product API v1");
+                s.SwaggerEndpoint("./v1/swagger.json", "Language Courses API v1");
             });
         }
 
@@ -49,8 +50,6 @@ public class Program
         s.ConfigureAutoMapper();
         s.ConfigureFluentValidation();
 
-        s.ConfigureResponseCaching();
-        s.ConfigureHttpCacheHeaders();
         s.AddMemoryCache();
 
         s.AddEndpointsApiExplorer();
@@ -68,10 +67,6 @@ public class Program
         {
             config.RespectBrowserAcceptHeader = true;
             config.ReturnHttpNotAcceptable = true;
-            config.CacheProfiles.Add("120SecondsDuration", new CacheProfile
-            {
-                Duration = 120
-            });
         }).AddNewtonsoftJson();
 
         s.AddCustomMediaTypes();
@@ -84,8 +79,7 @@ public class Program
         app.UseExceptionHandler();
         app.UseIpRateLimiting();
         app.UseCors("CorsPolicy");
-        app.UseResponseCaching();
-        app.UseHttpCacheHeaders();
+        
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseForwardedHeaders(new ForwardedHeadersOptions
@@ -93,7 +87,6 @@ public class Program
             ForwardedHeaders = ForwardedHeaders.All
         });
         app.UseRouting();
-
         app.UseAuthentication();
         app.UseAuthorization();
     }

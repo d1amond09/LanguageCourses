@@ -19,19 +19,20 @@ internal class JobTitleRepository(LanguageCoursesContext appDbContext) :
 
     public async Task<PagedList<JobTitle>> GetAllJobTitlesAsync(JobTitleParameters jobTitleParameters, bool trackChanges = false)
     {
-        var jobTitles =
-            await FindAll(trackChanges)
+        var jobTitles = FindAll(trackChanges)
                 .FilterBySalary(jobTitleParameters.MinSalary, jobTitleParameters.MaxSalary)
                 .Search(jobTitleParameters.SearchTerm)
-                .Sort(jobTitleParameters.OrderBy)
+                .Sort(jobTitleParameters.OrderBy);
+
+        var count = await jobTitles.CountAsync();
+
+        var jobTitlesToReturn = await jobTitles
                 .Skip((jobTitleParameters.PageNumber - 1) * jobTitleParameters.PageSize)
                 .Take(jobTitleParameters.PageSize)
                 .ToListAsync();
 
-        var count = await FindAll(trackChanges).CountAsync();
-
         return new PagedList<JobTitle>(
-            jobTitles,
+            jobTitlesToReturn,
             count,
             jobTitleParameters.PageNumber,
             jobTitleParameters.PageSize

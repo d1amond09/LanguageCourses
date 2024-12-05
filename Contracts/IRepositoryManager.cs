@@ -9,6 +9,7 @@ public interface IRepositoryManager
     IJobTitleRepository JobTitles { get; }
     IPaymentRepository Payments { get; }
     IStudentRepository Students { get; }
+    void SetModified<T>(T entity) where T : class;
     Task SaveAsync();
     void SaveChanges();
 }

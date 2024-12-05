@@ -8,6 +8,7 @@ using LanguageCourses.Domain.RequestFeatures.ModelParameters;
 using LanguageCourses.WebAPI.ActionFilters;
 using LanguageCourses.WebAPI.Extensions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LanguageCourses.WebAPI.Controllers;
@@ -16,6 +17,7 @@ namespace LanguageCourses.WebAPI.Controllers;
 [Consumes("application/json")]
 [Route("api/employees")]
 [ApiController]
+[Authorize]
 public class EmployeesController(ISender sender) : ApiControllerBase
 {
     private readonly ISender _sender = sender;
@@ -51,6 +53,7 @@ public class EmployeesController(ISender sender) : ApiControllerBase
     }
 
     [HttpPost(Name = "CreateEmployee")]
+    [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> CreateEmployee([FromBody] EmployeeForCreationDto employee)
     {
         var baseResult = await _sender.Send(new CreateEmployeeCommand(employee));
@@ -64,6 +67,7 @@ public class EmployeesController(ISender sender) : ApiControllerBase
     }
 
     [HttpDelete("{id:guid}")]
+    [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> DeleteEmployee(Guid id)
     {
         var baseResult = await _sender.Send(new DeleteEmployeeCommand(id, TrackChanges: false));
@@ -75,6 +79,7 @@ public class EmployeesController(ISender sender) : ApiControllerBase
     }
 
     [HttpPut("{id:guid}")]
+    [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> UpdateEmployee(Guid id, [FromBody] EmployeeForUpdateDto employee)
     {
         var baseResult = await _sender.Send(new UpdateEmployeeCommand(id, employee, TrackChanges: true));

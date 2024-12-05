@@ -8,6 +8,7 @@ using LanguageCourses.Domain.RequestFeatures.ModelParameters;
 using LanguageCourses.WebAPI.ActionFilters;
 using LanguageCourses.WebAPI.Extensions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LanguageCourses.WebAPI.Controllers;
@@ -16,6 +17,7 @@ namespace LanguageCourses.WebAPI.Controllers;
 [ApiExplorerSettings(GroupName = "v1")]
 [Consumes("application/json")]
 [ApiController]
+[Authorize]
 public class JobTitlesController(ISender sender) : ApiControllerBase
 {
     private readonly ISender _sender = sender;
@@ -51,6 +53,7 @@ public class JobTitlesController(ISender sender) : ApiControllerBase
     }
 
     [HttpPost(Name = "CreateJobTitle")]
+    [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> CreateJobTitle([FromBody] JobTitleForCreationDto jobTitle)
     {
         var baseResult = await _sender.Send(new CreateJobTitleCommand(jobTitle));
@@ -64,6 +67,7 @@ public class JobTitlesController(ISender sender) : ApiControllerBase
     }
 
     [HttpDelete("{id:guid}")]
+    [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> DeleteJobTitle(Guid id)
     {
         var baseResult = await _sender.Send(new DeleteJobTitleCommand(id, TrackChanges: false));
@@ -75,6 +79,7 @@ public class JobTitlesController(ISender sender) : ApiControllerBase
     }
 
     [HttpPut("{id:guid}")]
+    [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> UpdateJobTitle(Guid id, [FromBody] JobTitleForUpdateDto jobTitle)
     {
         var baseResult = await _sender.Send(new UpdateJobTitleCommand(id, jobTitle, TrackChanges: true));

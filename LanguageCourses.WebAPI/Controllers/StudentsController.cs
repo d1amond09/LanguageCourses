@@ -8,24 +8,26 @@ using LanguageCourses.Domain.RequestFeatures.ModelParameters;
 using LanguageCourses.WebAPI.ActionFilters;
 using LanguageCourses.WebAPI.Extensions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LanguageCourses.WebAPI.Controllers;
 
-[Route("api/payments")]
+[Route("api/students")]
 [ApiExplorerSettings(GroupName = "v1")]
 [Consumes("application/json")]
 [ApiController]
-public class PaymentsController(ISender sender) : ApiControllerBase
+[Authorize]
+public class StudentsController(ISender sender) : ApiControllerBase
 {
     private readonly ISender _sender = sender;
 
-    [HttpGet(Name = "GetPayments")]
+    [HttpGet(Name = "GetStudents")]
     [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
-    public async Task<IActionResult> GetPayments([FromQuery] PaymentParameters paymentParameters)
+    public async Task<IActionResult> GetStudents([FromQuery] StudentParameters studentParameters)
     {
-        var linkParams = new LinkPaymentParameters(paymentParameters, HttpContext);
-        var baseResult = await _sender.Send(new GetPaymentsQuery(linkParams, TrackChanges: false));
+        var linkParams = new LinkStudentParameters(studentParameters, HttpContext);
+        var baseResult = await _sender.Send(new GetStudentsQuery(linkParams, TrackChanges: false));
         if (!baseResult.Success)
             return ProcessError(baseResult);
 
@@ -38,35 +40,37 @@ public class PaymentsController(ISender sender) : ApiControllerBase
             Ok(linkResponse.ShapedEntities);
     }
 
-    [HttpGet("{id:guid}", Name = "GetPayment")]
-    public async Task<IActionResult> GetPayment(Guid id)
+    [HttpGet("{id:guid}", Name = "GetStudent")]
+    public async Task<IActionResult> GetStudent(Guid id)
     {
-        var baseResult = await _sender.Send(new GetPaymentQuery(id, TrackChanges: false));
+        var baseResult = await _sender.Send(new GetStudentQuery(id, TrackChanges: false));
 
         if (!baseResult.Success)
             return ProcessError(baseResult);
 
-        var products = baseResult.GetResult<PaymentDto>();
+        var products = baseResult.GetResult<StudentDto>();
         return Ok(products);
     }
 
-    [HttpPost(Name = "CreatePayment")]
-    public async Task<IActionResult> CreatePayment([FromBody] PaymentForCreationDto payment)
+    [HttpPost(Name = "CreateStudent")]
+    [Authorize(Roles = "Administrator")]
+    public async Task<IActionResult> CreateStudent([FromBody] StudentForCreationDto student)
     {
-        var baseResult = await _sender.Send(new CreatePaymentCommand(payment));
+        var baseResult = await _sender.Send(new CreateStudentCommand(student));
 
         if (!baseResult.Success)
             return ProcessError(baseResult);
 
-        var createdProduct = baseResult.GetResult<PaymentDto>();
+        var createdProduct = baseResult.GetResult<StudentDto>();
 
-        return CreatedAtRoute("GetPayment", new { id = createdProduct.Id }, createdProduct);
+        return CreatedAtRoute("GetStudent", new { id = createdProduct.Id }, createdProduct);
     }
 
     [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> DeletePayment(Guid id)
+    [Authorize(Roles = "Administrator")]
+    public async Task<IActionResult> DeleteStudent(Guid id)
     {
-        var baseResult = await _sender.Send(new DeletePaymentCommand(id, TrackChanges: false));
+        var baseResult = await _sender.Send(new DeleteStudentCommand(id, TrackChanges: false));
 
         if (!baseResult.Success)
             return ProcessError(baseResult);
@@ -75,9 +79,10 @@ public class PaymentsController(ISender sender) : ApiControllerBase
     }
 
     [HttpPut("{id:guid}")]
-    public async Task<IActionResult> UpdatePayment(Guid id, [FromBody] PaymentForUpdateDto payment)
+    [Authorize(Roles = "Administrator")]
+    public async Task<IActionResult> UpdateStudent(Guid id, [FromBody] StudentForUpdateDto student)
     {
-        var baseResult = await _sender.Send(new UpdatePaymentCommand(id, payment, TrackChanges: true));
+        var baseResult = await _sender.Send(new UpdateStudentCommand(id, student, TrackChanges: true));
 
         if (!baseResult.Success)
             return ProcessError(baseResult);

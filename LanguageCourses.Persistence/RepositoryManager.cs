@@ -1,11 +1,14 @@
-﻿using Contracts;
+﻿using System;
+using Contracts;
 using Contracts.Repositories;
 using LanguageCourses.Persistence.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace LanguageCourses.Persistence;
 
 public class RepositoryManager : IRepositoryManager
 {
+    public LanguageCoursesContext DbContext => _dbContext;
     private readonly LanguageCoursesContext _dbContext;
     private readonly Lazy<IEmployeeRepository> _empRep;
     private readonly Lazy<IJobTitleRepository> _jobRep;
@@ -27,7 +30,10 @@ public class RepositoryManager : IRepositoryManager
     public ICourseRepository Courses => _coursesRep.Value;
     public IStudentRepository Students => _studRep.Value;
     public IPaymentRepository Payments => _paymRep.Value;
-
+    public void SetModified<T>(T entity) where T : class
+    {
+        _dbContext.Entry(entity).State = EntityState.Modified;
+    }
     public async Task SaveAsync() => await _dbContext.SaveChangesAsync();
     public void SaveChanges() => _dbContext.SaveChanges();
 }

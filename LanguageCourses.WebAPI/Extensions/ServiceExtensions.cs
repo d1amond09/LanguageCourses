@@ -42,7 +42,7 @@ public static class ServiceExtensions
     public static void ConfigureSqlContext(this IServiceCollection services,
         IConfiguration configuration) =>
         services.AddDbContext<LanguageCoursesContext>(opts =>
-            opts.UseSqlServer(configuration.GetConnectionString("ASPMonster_MSSQLServerConnection"), b =>
+            opts.UseSqlServer(configuration.GetConnectionString("docker_MSSQLServerConnection"), b =>
             {
                 b.MigrationsAssembly("LanguageCourses.Persistence");
                 b.EnableRetryOnFailure();
@@ -73,7 +73,7 @@ public static class ServiceExtensions
         services.AddHttpCacheHeaders(
             (expirationOpt) =>
             {
-                expirationOpt.MaxAge = 120;
+                expirationOpt.MaxAge = 2;
                 expirationOpt.CacheLocation = CacheLocation.Private;
             },
             (validationOpt) =>
@@ -198,5 +198,6 @@ public static class ServiceExtensions
                 new List<string>()
             } });
         });
+        
     }
 }
