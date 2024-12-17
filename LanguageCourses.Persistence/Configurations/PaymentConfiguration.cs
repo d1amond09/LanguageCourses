@@ -10,6 +10,7 @@ public class PaymentConfiguration : IEntityTypeConfiguration<Payment>
     {
         builder.Property(e => e.Id)
             .IsRequired()
+            .HasDefaultValueSql("NEWID()")
             .HasColumnName("PaymentID");
 
         builder.Property(e => e.Amount)

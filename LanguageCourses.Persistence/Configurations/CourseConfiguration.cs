@@ -10,6 +10,7 @@ public class CourseConfiguration : IEntityTypeConfiguration<Course>
     {
         builder.Property(e => e.Id)
             .IsRequired()
+            .HasDefaultValueSql("NEWID()")
             .HasColumnName("CourseID");
 
         builder.Property(e => e.EmployeeId)

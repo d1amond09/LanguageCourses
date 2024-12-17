@@ -10,7 +10,6 @@ using LanguageCourses.Domain.ConfigurationModels;
 using LanguageCourses.Domain.DataTransferObjects;
 using LanguageCourses.Persistence;
 using LanguageCourses.WebAPI.ActionFilters;
-using LanguageCourses.WebAPI.Formatters.Output;
 using LanguageCourses.WebAPI.GlobalException;
 using LanguageCourses.WebAPI.Utility;
 using LoggerService;
@@ -55,7 +54,7 @@ public static class ServiceExtensions
     public static void ConfigureAutoMapper(this IServiceCollection services) =>
         services.AddAutoMapper(x => x.AddProfile(new MappingProfile()));
 
-    public static void ConfigureMediatR(this IServiceCollection services) =>
+    public static void ConfigureMediatr(this IServiceCollection services) =>
         services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssembly(typeof(AssemblyReference).Assembly));
 
@@ -87,7 +86,7 @@ public static class ServiceExtensions
         services.Configure<MvcOptions>(config =>
         {
             var newtonsoftJsonOutputFormatter = config.OutputFormatters
-                .OfType<NewtonsoftJsonOutputFormatter>()?.FirstOrDefault();
+                .OfType<NewtonsoftJsonOutputFormatter>().FirstOrDefault();
 
             newtonsoftJsonOutputFormatter?.SupportedMediaTypes
                 .Add("application/hateoas+json");
@@ -127,7 +126,7 @@ public static class ServiceExtensions
         services.AddScoped<IDataShaper<StudentDto>, DataShaper<StudentDto>>();
     }
 
-    public static void ConfigureHATEOAS(this IServiceCollection services)
+    public static void ConfigureHateoas(this IServiceCollection services)
     {
         services.AddScoped<ICourseLinks, CourseLinks>();
         services.AddScoped<IStudentLinks, StudentLinks>();
@@ -139,9 +138,6 @@ public static class ServiceExtensions
 
     public static void ConfigureLoggerService(this IServiceCollection services) =>
         services.AddSingleton<ILoggerManager, LoggerManager>();
-
-    public static IMvcBuilder AddCustomCSVFormatter(this IMvcBuilder builder) =>
-        builder.AddMvcOptions(config => config.OutputFormatters.Add(new CsvOutputFormatter()));
 
     public static void AddJwtAuthenticationConfiguration(this IServiceCollection services, IConfiguration config)
     {

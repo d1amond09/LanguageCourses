@@ -10,6 +10,7 @@ public class StudentConfiguration : IEntityTypeConfiguration<Student>
     {
         builder.Property(e => e.Id)
             .IsRequired()
+            .HasDefaultValueSql("NEWID()")
             .HasColumnName("StudentID");
 
         builder.HasData

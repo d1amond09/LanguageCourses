@@ -10,6 +10,7 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
     {
         builder.Property(e => e.Id)
             .IsRequired()
+            .HasDefaultValueSql("NEWID()")
             .HasColumnName("EmployeeID");
 
         builder.HasData

@@ -10,6 +10,7 @@ public class JobTitleConfiguration : IEntityTypeConfiguration<JobTitle>
     {
         builder.Property(e => e.Id)
             .IsRequired()
+            .HasDefaultValueSql("NEWID()")
             .HasColumnName("JobTitleID");
 
         builder.Property(e => e.Salary)

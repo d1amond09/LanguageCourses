@@ -15,7 +15,7 @@ public sealed class CreateStudentHandler(IRepositoryManager rep, IMapper mapper)
 
     public async Task<ApiBaseResponse> Handle(CreateStudentCommand request, CancellationToken cancellationToken)
     {
-        var entityToCreate = _mapper.Map<Student>(request.Student);
+        var entityToCreate = _mapper.Map<Student>(request.Student); 
         entityToCreate.Courses.Clear();
 
         if (request.Student.CourseIds != null && request.Student.CourseIds.Any())

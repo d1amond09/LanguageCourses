@@ -1,0 +1,24 @@
+# This is a generated file. Not intended for manual editing.
+version: "3.2"
+services:
+  languagecourses.webapi:
+    build:
+      context: "C:\\Users\\d1amond\\Desktop\\WorkZone\\3курс\\Экзамены\\Разработка\
+        \ приложений баз данных для информационных систем\\LanguageCourses"
+      dockerfile: "LanguageCourses.WebAPI/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/LanguageCourses.WebAPI.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "languagecourseswebapi:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\d1amond\\Desktop\\WorkZone\\3курс\\Экзамены\\Разработка приложен\
+      ий баз данных для информационных систем\\LanguageCourses\\LanguageCourses.WebAPI:/app:rw"
+    - "C:\\Users\\d1amond\\Desktop\\WorkZone\\3курс\\Экзамены\\Разработка приложен\
+      ий баз данных для информационных систем\\LanguageCourses:/src:rw"
+    - "C:\\Users\\d1amond\\.nuget\\packages:/home/app/.nuget/packages"
+    working_dir: "/app"

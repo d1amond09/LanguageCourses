@@ -45,7 +45,7 @@ public class Program
 
         s.ConfigureSqlContext(config);
         s.ConfigureRepositoryManager();
-        s.ConfigureMediatR();
+        s.ConfigureMediatr();
 
         s.ConfigureAutoMapper();
         s.ConfigureFluentValidation();
@@ -58,7 +58,7 @@ public class Program
         s.AddJwtAuthenticationConfiguration(config);
 
         s.ConfigureDataShaping();
-        s.ConfigureHATEOAS();
+        s.ConfigureHateoas();
 
         s.ConfigureRateLimitingOptions();
         s.AddHttpContextAccessor();
