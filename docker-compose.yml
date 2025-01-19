@@ -1,0 +1,48 @@
+version: '3.2'
+
+volumes:
+  sql_data:
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA="Y"
+      - MSSQL_SA_PASSWORD=NewPa55w@rd2022
+    ports:
+      - "8111:1433"
+    volumes:
+      - sql_data:/var/opt/mssql
+
+  inno_shop.services.userapi:
+    image: ${DOCKER_REGISTRY-}innoshopservicesuserapi
+    build:
+      context: U:\C#\2024\ASP.NET\Inno_Shop\
+      dockerfile: Inno_Shop.Services.UserAPI/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8082
+      - ASPNETCORE_HTTPS_PORTS=444
+      - ConnectionStrings__DefaultConnection=Server=db;Database=InnoShopDB_Identity;User Id=SA;Password=NewPa55w@rd2022;TrustServerCertificate=True;
+    ports:
+      - "8002:8082"
+      - "8003:444"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+
+  languagecourses.webapi:
+    image: ${DOCKER_REGISTRY-}languagecourseswebapi
+    build:
+      context: .
+      dockerfile: LanguageCourses.WebAPI/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8083
+      - ASPNETCORE_HTTPS_PORTS=445
+    ports:
+      - "8006:8083"
+      - "8007:445"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
